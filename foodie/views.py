@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 # Create your views here.
 
 def index(request):
-    return render(request, 'reddit/index.html')
+    return render(request, 'foodie/index.html')
 
 def about(request):
-    return  render(request, 'reddit/about.html')
+    return  render(request, 'foodie/about.html')
