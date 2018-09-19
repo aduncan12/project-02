@@ -20,10 +20,7 @@
 
             {# Some logic on what to display for last item#}
             {% if user.is_authenticated %}
-<<<<<<< HEAD
-=======
                 <li><a href="{% url 'logout' %}">Logout</a></li>
->>>>>>> adbd4b62d5788f3ad55c9241f665c0a86efedc72
             {% else %}
                 <li><a href="{% url 'register' %}">Sign Up</a></li>
                 <li><a href="{% url 'user_login' %}">Login</a></li>
