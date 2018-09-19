@@ -11,7 +11,11 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
     <body>
-    <nav class="navbar navbar-default navbar-static-top">
+        <header>
+            <img id="headerImage" src="/static/images/sushi.jpeg" alt="sushi">
+        </header>
+    
+        <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
         <ul class="nav navbar-nav">
             {# Django Home Link / Admin Link / Register Link #}
@@ -28,11 +32,13 @@
         </ul>
         </div>
     </nav>
+    <!-- <img src="/static/images/italian-pizza-restaurant-italy.jpg" alt="restaurant"> -->
+
     <div class="container">
     {% block content %}
     {% endblock %}
     </div>
     </body>
-    <footer><hr /> 2018 All Rights Reserved</footer>
+    <footer><hr /> &copy 2018 Food Doods All Rights Reserved</footer>
 
 </html>

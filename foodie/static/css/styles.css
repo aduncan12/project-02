@@ -28,4 +28,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+
+#headerImage {
+    width: 100vw;
+    height: 50vh;
 }
