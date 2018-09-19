@@ -4,41 +4,37 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <meta charset="utf-8">
-    <title>Foodiee</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
+        <meta charset="utf-8">
+        <title>Foodiee</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    </head>
     <body>
-        <header>
-            <img id="headerImage" src="/static/images/sushi.jpeg" alt="sushi">
-        </header>
-    
-        <nav class="navbar navbar-default navbar-static-top">
+        <nav class="navbar navbar-default navbar-static-top navbar sticky">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    {# Django Home Link / Admin Link / Register Link #}
+                    <li><a class="navbar-link" href="{% url 'index' %}">Home</a></li>
+                    <li><a class="navbar-link" href="{% url 'about' %}">About</a></li>
+                
+                    {# Some logic on what to display for last item#}
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'register' %}">Sign Up</a></li>
+                        <li><a href="{% url 'user_login' %}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        <img id="headerImage" src="{% static 'images/sushi.jpeg' %}" alt="sushi">
+        <!-- <img src="/static/images/italian-pizza-restaurant-italy.jpg" alt="restaurant"> -->
+
         <div class="container">
-        <ul class="nav navbar-nav">
-            {# Django Home Link / Admin Link / Register Link #}
-            <li><a class="navbar-link" href="{% url 'index' %}">Home</a></li>
-            <li><a class="navbar-link" href="{% url 'about' %}">About</a></li>
-
-            {# Some logic on what to display for last item#}
-            {% if user.is_authenticated %}
-                <li><a href="{% url 'logout' %}">Find Restaurant</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-            {% else %}
-                <li><a href="{% url 'register' %}">Sign Up</a></li>
-                <li><a href="{% url 'user_login' %}">Login</a></li>
-            {% endif %}
-        </ul>
+            {% block content %}
+            {% endblock %}
         </div>
-    </nav>
-    <!-- <img src="/static/images/italian-pizza-restaurant-italy.jpg" alt="restaurant"> -->
-
-    <div class="container">
-    {% block content %}
-    {% endblock %}
-    </div>
     </body>
     <footer><hr /> &copy 2018 Food Doods All Rights Reserved</footer>
 
