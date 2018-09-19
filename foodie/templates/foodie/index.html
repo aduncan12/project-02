@@ -1,0 +1,25 @@
+{% extends "foodie/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+    <div class="jumbotron">
+        <h1>Welcome to Fooodie !</h1>
+    {% if user.is_authenticated %}
+        <h3>Hello {{ user.username }}</h3>
+    {% else %}
+        <h3>Register or Login to find your new favorite restaurant!</h3>
+    {% endif %}
+    </div>
+<!-- </div>
+
+    <div class="posts">
+    {% for post in allposts %}
+    <p>{{ post.post_vote }} {{ post.picture }}<h4><a href="">{{ post.title }}</a></h4> <a href="{{ post.site_url }}">{{ post.site_url }}</a> {{ post.post_time }}</p>
+    <h4>{{ post.user }}</h4>
+    <p>{{ post.content }}</p>
+
+    <hr>
+    {% endfor %}
+    </div> -->
+{% endblock %}

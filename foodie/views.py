@@ -12,6 +12,7 @@ def index(request):
 
 def about(request):
     return  render(request, 'foodie/about.html')
+<<<<<<< HEAD
 
 @login_required
 def special(request):
@@ -61,3 +62,5 @@ def user_login(request):
             return HttpResponse("Invalid login details given")
     else:
         return render(request, 'foodie/login.html', {})
+=======
+>>>>>>> c6d1ce5fd696900c060e7196f48d2030eb7a0a1f
