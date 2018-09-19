@@ -34,7 +34,6 @@
   flex-wrap: wrap;
   justify-content: space-around;
 }
-<<<<<<< HEAD
 
 #headerImage {
   width: 100vw;
@@ -42,12 +41,7 @@
 }
 
 /*# sourceMappingURL=styles.css.map */
-=======
-.team{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
+
 .navbar{
     width: 100%;
     height: 50px;
@@ -67,8 +61,3 @@
     border-top: 0;
     z-index: 100;
 }
-/* #headerImage {
-    width: 100vw;
-    height: 50vh;
-} */
->>>>>>> d513e10a87dfa800f427ba3db24932d218d6a4c8
