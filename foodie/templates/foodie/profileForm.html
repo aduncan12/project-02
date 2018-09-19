@@ -1,0 +1,22 @@
+{% extends "foodie/base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+        <div class="jumbotron">
+        {% if registered %}
+
+        <h1>Edit successfully!</h1>
+        
+        {% else %}
+        
+        <h1>Editing {{ user }}'s profile</h1>
+        <form enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" name="" value="Update">
+        </form>
+        {% endif %}
+    </div>
+    </div>
+{% endblock %}

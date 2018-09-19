@@ -26,16 +26,38 @@ def register(request):
     registered = False
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
+        profile_form = UserProfileForm(data=request.POST)
         if user_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
             user.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            if 'profile_pic' in request.FILES:
+                profile.profile_pic = request.FILES['profile_pic']
+            profile.save()
             registered = True
         else:
             print(user_form.errors)
     else:
         user_form = UserForm()
     return render(request, 'foodie/registration.html', {'user_form':user_form,'registered':registered})
+
+@login_required
+def profile(request):
+    return render(request, 'foodie/profile.html')
+
+@login_required
+def profile_edit(request):
+    user = request.user
+    if request.method == "POST":
+        form = UserProfileForm(request.POST, instance=user)
+        if form.is_valid():
+            user = form.save()
+            return redirect('profile')
+    else:
+        form = UserProfileForm(instance=user)
+    return render(request, 'foodie/profileForm.html', {'form': form, 'user': user})
 
 def user_login(request):
     if request.method == 'POST':
