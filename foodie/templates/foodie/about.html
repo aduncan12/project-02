@@ -11,9 +11,33 @@
         <h3>Register or Login if you'd like to</h3>
     {% endif %}
     </div>
-<!-- </div>
+    <img class="teampic" src="{% static 'images/group.jpg' %}">
+    <h1 id="teamfoodie">Meet Team Foodie</h1>
+    <div class="team">
+        <div class="member" id="yi">
+            <h2>Yi Liu</h2>
+            <img src="{% static 'images/yi.jpg' %}" class="biopic">
+            <p class='bio'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni omnis ipsum animi repudiandae, commodi ea blanditiis natus eos dolorum laudantium recusandae beatae magnam exercitationem dolores sapiente quis excepturi sit distinctio.</p>
+        </div>
+        <div class="member" id="francisco">
+            <h2>Francisco Sandoval</h2>
+            <img src="{% static 'images/kiko.jpg' %}" class="biopic">
+            <p class='bio'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, rerum, nam, exercitationem laudantium maxime deserunt illo amet voluptatibus accusantium voluptatum iure aliquam pariatur sequi sit asperiores fugit quam numquam sapiente!</p>
+        </div>
+        <div class="member" id="waika">
+            <h2>Wai Ka Wong</h2>
+            <img src="{% static 'images/pepe.gif' %}" class="biopic">
+            <p class='bio'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus nulla accusantium eum blanditiis iste! Rerum perspiciatis recusandae corrupti! Dolorem consectetur, mollitia possimus eum qui iusto neque earum blanditiis velit aliquid?</p>
+        </div>
+        <div class="member" id="alan">
+            <h2>Alan Duncan</h2>
+            <img src="{% static 'images/pepe.gif' %}" class="biopic">
+            <p class='bio'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veritatis harum quis rerum. Quam placeat quasi rerum asperiores explicabo alias quidem error laboriosam doloribus cumque earum non hic, quae nihil repellat?</p>
+        </div>
+    </div>
+</div>
 
-    <div class="posts">
+    <!-- <div class="posts">
     {% for post in allposts %}
     <p>{{ post.post_vote }} {{ post.picture }}<h4><a href="">{{ post.title }}</a></h4> <a href="{{ post.site_url }}">{{ post.site_url }}</a> {{ post.post_time }}</p>
     <h4>{{ post.user }}</h4>
