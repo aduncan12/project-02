@@ -1,29 +1,48 @@
-#teamfoodie{
-    text-align: center;
+#teamfoodie {
+  text-align: center;
 }
-.biopic{
-    height: auto;
-    width: 40%;
+
+.biopic {
+  height: auto;
+  width: 40%;
 }
-.member{
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* justify-content: center; */
+
+.member {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
 }
-.member p{
-    width: 80%;
-    text-align: center;
-    margin-top: 20px;
+
+.member p {
+  width: 80%;
+  text-align: center;
+  margin-top: 20px;
 }
-.teampic{
-    margin: auto;
-    margin: 10%;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    width: 80%;
+
+.teampic {
+  margin: auto;
+  margin: 10%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 80%;
 }
+
+.team {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+<<<<<<< HEAD
+
+#headerImage {
+  width: 100vw;
+  height: 50vh;
+}
+
+/*# sourceMappingURL=styles.css.map */
+=======
 .team{
     display: flex;
     flex-wrap: wrap;
@@ -52,3 +71,4 @@
     width: 100vw;
     height: 50vh;
 } */
+>>>>>>> d513e10a87dfa800f427ba3db24932d218d6a4c8
