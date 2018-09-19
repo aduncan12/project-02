@@ -48,6 +48,11 @@ def profile(request):
     return render(request, 'foodie/profile.html')
 
 @login_required
+def userprofile(request):
+    userprofile = request.user
+    return render(request, 'foodie/userprofile.html', {'userprofile': userprofile})
+
+@login_required
 def profile_edit(request):
     user = request.user
     if request.method == "POST":
