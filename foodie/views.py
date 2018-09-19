@@ -76,3 +76,7 @@ def user_login(request):
             return HttpResponse("Invalid login details given")
     else:
         return render(request, 'foodie/login.html', {})
+
+@login_required
+def restaurants(request):
+    return render(request, 'foodie/restaurants.html')
