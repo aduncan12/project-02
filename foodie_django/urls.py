@@ -21,7 +21,7 @@ from foodie import views
 
 urlpatterns=[
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
+    path('', include('foodie.urls')),
     path('about', views.about, name='about')
     # path('special', views.special, name='special'),
     # path('foodie/', include('foodie.urls')),
