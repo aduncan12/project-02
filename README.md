@@ -81,3 +81,13 @@
 - Create ERD
 - Check in with teacher got aprovel
 - create database and seed
+
+### 9-19-2018
+- User Profile figured out
+- Map on results page up and running
+- Home page template finished
+- Database connects user and empty userprofile
+
+### 9-20-2018
+- Check box for prefrences https://stackoverflow.com/questions/1760421/how-can-i-render-a-manytomanyfield-as-checkboxes
+- User Reviews
