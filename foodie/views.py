@@ -93,7 +93,7 @@ def create_review(request):
         form = ReviewForm(request.POST)
         if form.is_valid():
             review = form.save(commit=False)
-            # review.user = request.user
+            review.user = request.user
             review.save()
             return redirect('userprofile')
         else:
@@ -105,3 +105,7 @@ def create_review(request):
 def review_view(request, pk):
     review = Review.objects.get(id=pk)
     return render(request, 'foodie/review_view.html', {'review': review})
+
+# def review(request):
+#     review = Review.objects.get('title', 'content')
+#     return render(request, 'foodie/userprofile.html', {'user_review': review})
