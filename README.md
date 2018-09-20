@@ -91,3 +91,4 @@
 ### 9-20-2018
 - Check box for prefrences https://stackoverflow.com/questions/1760421/how-can-i-render-a-manytomanyfield-as-checkboxes
 - User Reviews
+- Sent an array of prefrence id's to app.js
