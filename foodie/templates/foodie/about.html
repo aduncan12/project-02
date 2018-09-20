@@ -7,9 +7,9 @@
     <div class="jumbotron picture">
         <h1>About</h1>
     {% if user.is_authenticated %}
-        <h3>Hello {{ user.username }}</h3>
+        <!-- <h3>Hello {{ user.username }}</h3> -->
     {% else %}
-        <h3>Register or Login if you'd like to</h3>
+        <h3>Register or Login to find your new favorite restaurant!</h3>
     {% endif %}
     </div>
     <img class="teampic" src="{% static 'images/group.jpg' %}">
