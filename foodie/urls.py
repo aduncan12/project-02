@@ -3,6 +3,7 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
+# the bottom + static() is for imagefield, static means public, make those path public
 urlpatterns = [
     path('', views.index, name="index"),
     path('about/', views.about, name="about"),
@@ -12,4 +13,4 @@ urlpatterns = [
     path('userprofile', views.userprofile, name='userprofile'),
     path('profile_edit', views.profile_edit, name='profile_edit'),
     path('restaurants', views.restaurants, name='restaurants')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

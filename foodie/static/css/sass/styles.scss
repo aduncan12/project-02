@@ -16,12 +16,6 @@
     /* justify-content: center; */
 }
 
-// .member p{
-//     width: 80%;
-//     text-align: center;
-//     margin-top: 20px;
-// }
-
 .teampic{
     margin: auto;
     margin: 10%;
@@ -76,11 +70,13 @@
     height: 180px;
     margin-top: 100px;
     margin-bottom: 10px;
-}
 
-.jumbotron{
-    margin-top: 100px;
-}
+  }
+  
+  .jumbotron{
+      margin-top: 100px;
+  }
+
 
 #map {
     width: 100vw;
@@ -98,4 +94,18 @@
 
 .dropdown-menu{
     flex-direction: column;
+}
+.footer {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+h2{
+    border-bottom: solid grey 1px;
+    padding-bottom: 4px;
+}
+h4{
+    margin: 40px, 0;
 }
