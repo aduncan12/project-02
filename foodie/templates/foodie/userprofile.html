@@ -4,6 +4,7 @@
 {% block content %}
   <div class="container">
     <div class="jumbotron">
+        <img src="{{ user.userprofile.profile_pic.url }}">
         <p>Description: {{ userprofile.description }}</p>
         <p>Preferences: {{ userprofile.preferences }}</p>
     </div>

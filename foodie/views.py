@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from .models import UserProfile
+from .models import UserProfile, User
 # Create your views here.
 
 def index(request):
@@ -28,7 +28,7 @@ def register(request):
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
         profile_form = UserProfileForm(data=request.POST)
-        if user_form.is_valid():
+        if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
             user.save()
@@ -43,13 +43,15 @@ def register(request):
 
 @login_required
 def userprofile(request):
-    userprofile = UserProfile.objects.get(id=request.user.id)
-    print(userprofile)
+    user = User.objects.get(id=request.user.id)
+    userprofile , created = UserProfile.objects.get_or_create(user=user)
     return render(request, 'foodie/userprofile.html', {'userprofile': userprofile})
 
 @login_required
 def profile_edit(request):
-    user = UserProfile.objects.get(id=request.user.id)
+    user = User.objects.get(id=request.user.id)
+    user , created = UserProfile.objects.get_or_create(user=user)
+    user.save()
     if request.method == "POST":
         form = UserProfileForm(request.POST, instance=user)
         if form.is_valid():
