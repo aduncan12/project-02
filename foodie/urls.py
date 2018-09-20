@@ -13,4 +13,4 @@ urlpatterns = [
     path('userprofile', views.userprofile, name='userprofile'),
     path('profile_edit', views.profile_edit, name='profile_edit'),
     path('restaurants', views.restaurants, name='restaurants')
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
