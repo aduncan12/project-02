@@ -41,6 +41,10 @@ def register(request):
         user_form = UserForm()
     return render(request, 'foodie/registration.html', {'user_form':user_form,'registered':registered})
 
+# when urls.pv access userprofile route, 
+# this function get 1 userprofile data that match current user id (pk),
+# (django know which userprofile internally) from database 
+# render the userprofile.html, pass in userprofile
 @login_required
 def userprofile(request):
     userprofile = UserProfile.objects.get(id=request.user.id)

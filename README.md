@@ -56,6 +56,7 @@
 ## Our progress:
 ### 9-17-2018
 - Came up with app idea
+<<<<<<< HEAD
 - Set up git repo
 - Created models, views, and urls
 
@@ -70,3 +71,16 @@
 - Fixed registration form and began updating profile form
 - Converted styling to Sass
 - Added dropdown profile info box
+=======
+- Research food / restaurant related api
+- Create Trollo
+- Create sprint
+- create wireframe
+- Create user story
+
+### 9-18-2018
+- Create github repo
+- Create ERD
+- Check in with teacher got aprovel
+- create database and seed
+>>>>>>> fde7e0563bbef15f2c59a4d241881d0a49c25a16
