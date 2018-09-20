@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from foodie.forms import UserForm, UserProfileForm
+from foodie.forms import UserForm, UserProfileForm, ReviewForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from .models import UserProfile, User
+from .models import UserProfile, User, Review
 # Create your views here.
 
 def index(request):
@@ -27,13 +27,10 @@ def register(request):
     registered = False
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
-        profile_form = UserProfileForm(data=request.POST)
-        if user_form.is_valid() and profile_form.is_valid():
+        if user_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
             user.save()
-            profile = profile_form.save(commit=False)
-            profile.user = user
             registered = True
         else:
             print(user_form.errors)
@@ -89,3 +86,22 @@ def user_login(request):
 @login_required
 def restaurants(request):
     return render(request, 'foodie/restaurants.html')
+
+@login_required
+def create_review(request):
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            # review.user = request.user
+            review.save()
+            return redirect('userprofile')
+        else:
+            print('\nform is invalid\n')
+    else:
+        form = ReviewForm()
+    return render(request, 'foodie/review_form.html', {'form': form})
+
+def review_view(request, pk):
+    review = Review.objects.get(id=pk)
+    return render(request, 'foodie/review_view.html', {'review': review})

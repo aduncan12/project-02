@@ -1,0 +1,12 @@
+{% extends "foodie/base.html" %}
+{% load staticfiles %}
+
+
+{% block content %}
+<div>
+    <h4><a href="{{ review.site_url }}">{{ review.site_url }}</a></h4>
+    <h3>Title: {{ review.title }}</h3>
+    <h4>Content: {{ review.content }}</h4>
+</div>
+
+{% endblock %}
