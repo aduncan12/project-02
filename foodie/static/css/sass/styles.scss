@@ -13,11 +13,6 @@
     align-items: center;
     /* justify-content: center; */
 }
-// .member p{
-//     width: 80%;
-//     text-align: center;
-//     margin-top: 20px;
-// }
 .teampic{
     margin: auto;
     margin: 10%;
@@ -69,6 +64,7 @@
     margin-top: 100px;
     margin-bottom: 10px;
   }
+  
   .jumbotron{
       margin-top: 100px;
   }
@@ -86,4 +82,18 @@
 }
 .dropdown-menu{
     flex-direction: column;
+}
+.footer {
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+h2{
+    border-bottom: solid grey 1px;
+    padding-bottom: 4px;
+}
+h4{
+    margin: 40px, 0;
 }
