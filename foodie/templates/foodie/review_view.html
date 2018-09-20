@@ -4,19 +4,9 @@
 
 {% block content %}
 <div>
-    <h4><a href="{{ post.site_url }}">{{ post.site_url }}</a></h4>
-    <h3>Title: {{ post.title }}</h3>
-    <h4>Content: {{ post.content }}</h4>
-</div>
-<hr>
-<div>
-    <h4>Add a Comment:</h4>
-        <form enctype="multipart/form-data" method="POST">
-            {% csrf_token %}
-            {{ cform.as_p }}
-                <input type="submit" name="" value="Comment">
-        </form>
-                
+    <h4><a href="{{ review.site_url }}">{{ review.site_url }}</a></h4>
+    <h3>Title: {{ review.title }}</h3>
+    <h4>Content: {{ review.content }}</h4>
 </div>
 
 {% endblock %}

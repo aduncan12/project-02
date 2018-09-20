@@ -95,9 +95,9 @@ def create_review(request):
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
-            post = form.save(commit=False)
-            post.user = request.user
-            post.save()
+            review = form.save(commit=False)
+            # review.user = request.user
+            review.save()
             return redirect('userprofile')
         else:
             print('\nform is invalid\n')
