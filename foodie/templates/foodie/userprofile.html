@@ -2,21 +2,12 @@
 {% load staticfiles %}
 
 {% block content %}
-<<<<<<< HEAD
-  <div class="container">
-    <div class="jumbotron">
-        <img src="{{ user.userprofile.profile_pic.url }}">
-        <p>Description: {{ userprofile.description }}</p>
-        <p>Preferences: {{ userprofile.preferences }}</p>
-    </div>
-=======
 <div class="container">
   <div class="jumbotron">
     <p>Description: {{ userprofile.description }}</p>
     <p>Preferences: {{ userprofile.preferences }}</p>
     <!-- image src only need this project path, os.path is done in settings.py and urls.py -->
     <img src="{{ user.userprofile.profile_pic.url }}">
->>>>>>> 03fe89bf8910578a11712f08315c630655fdcafd
   </div>
 </div>
 {% endblock %}

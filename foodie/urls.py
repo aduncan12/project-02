@@ -13,11 +13,4 @@ urlpatterns = [
     path('userprofile', views.userprofile, name='userprofile'),
     path('profile_edit', views.profile_edit, name='profile_edit'),
     path('restaurants', views.restaurants, name='restaurants')
-<<<<<<< HEAD
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
-
-# look under django doc about imagefield, static means public, 
-# make those path public
-=======
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
->>>>>>> 03fe89bf8910578a11712f08315c630655fdcafd
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
