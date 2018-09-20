@@ -84,17 +84,33 @@
   width: 100vw;
   height: 100vh;
   z-index: 1;
+  margin-top: 50px;
 }
 
 #dropdown {
   border: solid black 1px;
   padding: 0;
   margin-top: 8px;
-  margin-left: 55vw;
 }
 
 .dropdown-menu {
   flex-direction: column;
+}
+
+.footer {
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+h2 {
+  border-bottom: solid grey 1px;
+  padding-bottom: 4px;
+}
+
+h4 {
+  margin: 40px, 0;
 }
 
 /*# sourceMappingURL=styles.css.map */
