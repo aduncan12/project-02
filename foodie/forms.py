@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserProfile
+from .models import UserProfile, Preference
 from django.contrib.auth.models import User
 
 class UserForm(forms.ModelForm):
@@ -9,6 +9,7 @@ class UserForm(forms.ModelForm):
         fields = ('username','password','email')
 
 class UserProfileForm(forms.ModelForm):
+    preferences = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,queryset=Preference.objects.all())
     class Meta():
         model = UserProfile
         fields = ('description','preferences','profile_pic')
