@@ -56,3 +56,17 @@
 ## Our progress:
 ### 9-17-2018
 - Came up with app idea
+- Set up git repo
+- Created models, views, and urls
+
+### 9-18-2018
+- Seeded database with cuisine types and IDs from Zomato API
+- Created About page
+- Added user authentication
+- Created base and index templates
+
+### 9-19-2018
+- Added map from leaflet
+- Fixed registration form and began updating profile form
+- Converted styling to Sass
+- Added dropdown profile info box
