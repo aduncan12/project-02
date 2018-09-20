@@ -1,0 +1,16 @@
+{% extends "foodie/base.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="container">
+    <div class="jumbotron">
+    
+        <h1>Review {{ restaurant }}</h1>
+        <form enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" name="" value="Post">
+        </form>
+        
+    </div>
+</div>
+{% endblock %}
