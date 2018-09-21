@@ -13,7 +13,7 @@ urlpatterns = [
     path('userprofile', views.userprofile, name='userprofile'),
     path('profile_edit', views.profile_edit, name='profile_edit'),
     path('restaurants', views.restaurants, name='restaurants'),
-    path('api/users/<int:pk>/preferences', views.user_preferences),
+    path('preferences', views.user_preferences, name='preferences'),
     path('review', views.create_review, name='review'),
     path('review/<int:pk>', views.review_view, name='review_view')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

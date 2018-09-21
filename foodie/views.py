@@ -47,10 +47,9 @@ def register(request):
 def userprofile(request):
     user = User.objects.get(id=request.user.id)
     userprofile , created = UserProfile.objects.get_or_create(user=user)
-    print(request.user.id)
-    user_reviews = Review.objects.get(id=request.user.id)
-    print("REVIEW:")
-    print(user_reviews.content)
+    # print(request.user.id)
+    # user_reviews = Review.objects.get(id=request.user.id)
+    # print(user_reviews.content)
     return render(request, 'foodie/userprofile.html', {'userprofile': userprofile, 'user_reviews': user_reviews})
 
 @login_required
@@ -95,15 +94,16 @@ def restaurants(request):
 # query preferences by user, put them into array, 
 # format as json object, 
 # display json object in route 'api/users/<int:pk>/preferences'
-def user_preferences(request, pk):
-    user = User.objects.get(id=pk)
-    preferences = user.userprofile.preferences.all()
-    pref_array = []
-    for pref in preferences:
-        print(pref.api_id)
-        pref_array.append(int(pref.api_id))
-    print(pref_array)
-    return JsonResponse({"preferences": pref_array})
+
+@login_required
+def user_preferences(request):
+    if request.method == 'GET':
+        user = User.objects.get(id=request.user.id)
+        preferences = user.userprofile.preferences.all()
+        pref_array = []
+        for pref in preferences:
+            pref_array.append(int(pref.api_id))
+        return JsonResponse({"preferences": pref_array})
 
 @login_required
 def create_review(request):
