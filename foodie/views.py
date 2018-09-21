@@ -50,6 +50,7 @@ def userprofile(request):
     user_id = request.user.id
     print(user_id)
     user_reviews = Review.objects.filter(user_id=user_id)
+    print(user_reviews)
     return render(request, 'foodie/userprofile.html', {'userprofile': userprofile, 'user_reviews': user_reviews})
 
 @login_required
@@ -139,3 +140,4 @@ def review_view(request, pk):
 #     user_review = Review.objects.get(id=request.user.id)
 #     print(user_review)
 #     return render(request, 'foodie/userprofile.html', {'user_review': user_review})
+
