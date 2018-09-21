@@ -34,6 +34,7 @@ $(document).ready(function () {
                         success: function (data) {
                             console.log(data)
                             console.log(data.restaurants)
+                            console.log("Hi")
                             var totalresults = data.restaurants;
                             if (totalresults.length > 0) {
                                 var newArr = nRandEleArr(totalresults, 4);
