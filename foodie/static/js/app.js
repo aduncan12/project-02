@@ -1,15 +1,3 @@
-// $(document).ready(function(){
-//     $.ajax({
-//         method: "GET",
-//         url: "api/users/<int:pk>/preferences",
-//         success:function(response){
-//             console.log(response["preferences"])
-//         },
-//         error: function(error){
-//             console.log(error)
-//         }
-//     })
-// })
 $(document).ready(function () {    
     $.ajax({
         method: "GET",
