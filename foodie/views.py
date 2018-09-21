@@ -46,7 +46,11 @@ def register(request):
 def userprofile(request):
     user = User.objects.get(id=request.user.id)
     userprofile , created = UserProfile.objects.get_or_create(user=user)
-    return render(request, 'foodie/userprofile.html', {'userprofile': userprofile})
+    print(request.user.id)
+    user_reviews = Review.objects.get(id=request.user.id)
+    print("REVIEW:")
+    print(user_reviews.content)
+    return render(request, 'foodie/userprofile.html', {'userprofile': userprofile, 'user_reviews': user_reviews})
 
 @login_required
 def profile_edit(request):
@@ -89,11 +93,12 @@ def restaurants(request):
 
 @login_required
 def create_review(request):
+    review = request
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
             review = form.save(commit=False)
-            review.user = request.user
+            request.user = review.user
             review.save()
             return redirect('userprofile')
         else:
@@ -106,6 +111,7 @@ def review_view(request, pk):
     review = Review.objects.get(id=pk)
     return render(request, 'foodie/review_view.html', {'review': review})
 
-# def review(request):
-#     review = Review.objects.get('title', 'content')
-#     return render(request, 'foodie/userprofile.html', {'user_review': review})
+def user_reviews(request):
+    user_review = Review.objects.get(id=request.user.id)
+    print(user_review)
+    return render(request, 'foodie/userprofile.html', {'user_review': user_review})
