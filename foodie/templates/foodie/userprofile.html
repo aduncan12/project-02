@@ -5,12 +5,19 @@
 <div class="container">
   <div class="jumbotron">
     <p>Description: {{ userprofile.description }}</p>
+    <!-- <p>Total preferences: {{ userprofile.preferences.all.length }}</p> -->
     <p>Preferences:</p>
     {% for preference in userprofile.preferences.all %}
       <p>{{preference.cuisine}}  -- {{preference.api_id}}</p>
     {% endfor %}
     <!-- image src only need this project path, os.path is done in settings.py and urls.py -->
     <img src="{{ user.userprofile.profile_pic.url }}">
+    <h1>Reviews</h1>
+      <div id="user_reviews">
+        <p> Begin Reviews: </p>
+          {{user_reviews.content}}
+        <p> Ends Reviews</p>
+      </div>
   </div>
 </div>
 {% endblock %}

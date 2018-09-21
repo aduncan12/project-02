@@ -14,7 +14,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     description = models.TextField(blank=True)
     preferences = models.ManyToManyField(Preference,blank=True)
-    profile_pic = models.ImageField(upload_to='profile_pics',blank=True)
+    profile_pic = models.ImageField(upload_to='profile_pics',blank=True, default='static/images/img_profile.png')
 
     def __str__(self):
         return self.user.username
@@ -36,6 +36,6 @@ class Review(models.Model):
     rating = models.PositiveSmallIntegerField()
 
     def __str__(self):
-        return self.content
+        return f'{self.restaurant} {self.content}'
 
 
