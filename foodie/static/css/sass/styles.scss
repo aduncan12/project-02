@@ -70,12 +70,51 @@
     height: 180px;
     margin-top: 100px;
     margin-bottom: 10px;
-
   }
   
-  .jumbotron{
-      margin-top: 100px;
+.picture2{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: transparent;
+  background-position: 50% 50%;
+  background-image: url("../images/veggies.jpg");
+  min-height: 0px;
+  height: 90vh;
+  margin-top: 100px;
+  margin-bottom: 10px;
+  margin: 0;
+  margin-right: 0;
+  width: 100%;
+}
+.picture3{
+    h1{
+        font-size: 200px;
+        font-family: 'Chicle';
+    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: transparent;
+    background-position: 50% 50%;
+    background-image: url("../images/pastry.jpg");
+    min-height: 0px;
+    height: 100vh;
+    margin-top: 100px;
+    margin-bottom: 10px;
+    margin: 0;
+    margin-right: 0;
+    width: 100%;
   }
+.jumbotron{
+    margin-top: 100px;
+}
 
 
 #map {
@@ -111,4 +150,7 @@ h4{
 }
 .review{
     margin-top: 300px;
+}
+hr{
+    margin-top: 0;
 }
