@@ -102,7 +102,7 @@ def restaurants(request):
 #         pref_array.append(int(pref.api_id))
 #     print('test::',pref_array)
 #     return JsonResponse({"preferences": pref_array})
-
+@login_required
 def user_preferences(request):
     if request.method == 'GET':
         user = User.objects.get(id=request.user.id)
