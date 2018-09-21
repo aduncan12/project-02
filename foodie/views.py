@@ -48,7 +48,7 @@ def userprofile(request):
     user = User.objects.get(id=request.user.id)
     userprofile , created = UserProfile.objects.get_or_create(user=user)
     user_id = request.user.id
-    user_reviews = Review.objects.filter(user_id=user_id)
+    user_reviews = Review.objects.filter(user_id = user_id)
     return render(request, 'foodie/userprofile.html', {'userprofile': userprofile, 'user_reviews': user_reviews})
 
 @login_required
@@ -90,38 +90,23 @@ def user_login(request):
 def restaurants(request):
     return render(request, 'foodie/restaurants.html')
 
-# query preferences by user, put them into array, 
-# format as json object, 
-# display json object in route 'api/users/<int:pk>/preferences'
-# def user_preferences(request, pk):
-#     user = User.objects.get(id=pk)
-#     preferences = user.userprofile.preferences.all()
-#     pref_array = []
-#     for pref in preferences:
-#         print("pref.api_i::",pref.api_id)
-#         pref_array.append(int(pref.api_id))
-#     print('test::',pref_array)
-#     return JsonResponse({"preferences": pref_array})
-@login_required
 def user_preferences(request):
     if request.method == 'GET':
         user = User.objects.get(id=request.user.id)
         preferences = user.userprofile.preferences.all()
         pref_array = []
         for pref in preferences:
-            print(pref.api_id)
             pref_array.append(int(pref.api_id))
-        print(pref_array)
         return JsonResponse({"preferences": pref_array})
 
 @login_required
 def create_review(request):
-    review = request
+    user = UserProfile.objects.get(id=request.user.id)
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
             review = form.save(commit=False)
-            request.user = review.user
+            review.user = user
             review.save()
             return redirect('userprofile')
         else:
@@ -133,8 +118,3 @@ def create_review(request):
 def review_view(request, pk):
     review = Review.objects.get(id=pk)
     return render(request, 'foodie/review_view.html', {'review': review})
-
-# def user_reviews(request):
-#     user_review = Review.objects.get(id=request.user.id)
-#     print(user_review)
-#     return render(request, 'foodie/userprofile.html', {'user_review': user_review})
