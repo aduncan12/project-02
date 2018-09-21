@@ -12,5 +12,9 @@ urlpatterns = [
     path('logout', views.user_logout, name='logout'),
     path('userprofile', views.userprofile, name='userprofile'),
     path('profile_edit', views.profile_edit, name='profile_edit'),
-    path('restaurants', views.restaurants, name='restaurants')
+    path('restaurants', views.restaurants, name='restaurants'),
+
+    path('api/users/<int:pk>/preferences', views.user_preferences)
+
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
