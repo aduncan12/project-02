@@ -8,7 +8,7 @@
     <!-- <p>Total preferences: {{ userprofile.preferences.all.length }}</p> -->
     <p>Preferences:</p>
     {% for preference in userprofile.preferences.all %}
-    <p>{{preference.cuisine}} -- {{preference.api_id}}</p>
+      <p>{{preference.cuisine}}</p>
     {% endfor %}
     <!-- image src only need this project path, os.path is done in settings.py and urls.py -->
     <img src="{{ user.userprofile.profile_pic.url }}">
