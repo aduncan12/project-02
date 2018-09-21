@@ -48,7 +48,7 @@ def userprofile(request):
     user = User.objects.get(id=request.user.id)
     userprofile , created = UserProfile.objects.get_or_create(user=user)
     user_id = request.user.id
-    print(f'kiko {user_id}')
+    print(user_id)
     user_reviews = Review.objects.filter(user_id=user_id)
     return render(request, 'foodie/userprofile.html', {'userprofile': userprofile, 'user_reviews': user_reviews})
 

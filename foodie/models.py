@@ -37,5 +37,4 @@ class Review(models.Model):
 
     def __str__(self):
         return f'{self.restaurant} {self.rating} {self.content} {self.user}'
-
-
+        
