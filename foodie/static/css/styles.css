@@ -76,8 +76,84 @@
   margin-bottom: 10px;
 }
 
+.picture2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: transparent;
+  background-position: 50% 50%;
+  background-image: url("../images/veggies.jpg");
+  min-height: 0px;
+  height: 90vh;
+  margin-top: 100px;
+  margin-bottom: 10px;
+  margin: 0;
+  margin-right: 0;
+  width: 100%;
+}
+
+.picture3 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: transparent;
+  background-position: 50% 50%;
+  background-image: url("../images/cafe.jpg");
+  min-height: 0px;
+  height: 100vh;
+  margin-top: 100px;
+  margin-bottom: 10px;
+  margin: 0;
+  margin-right: 0;
+  width: 100%;
+}
+.picture3 h1 {
+  font-size: 200px;
+  font-family: "Chicle";
+  color: lightblue;
+  -webkit-text-fill-color: lightblue;
+  /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: black;
+}
+
 .jumbotron {
   margin-top: 100px;
+}
+
+.picture4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: transparent;
+  background-position: 50% 50%;
+  background-image: url("../images/veggies.jpg");
+  min-height: 0px;
+  height: 90vh;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  margin: 0;
+  margin-right: 0;
+  width: 100%;
+}
+
+.jumbotron.review {
+  padding: 20px;
+  margin: 100px;
+  height: 50vh;
+}
+
+#id_content {
+  height: 50px;
 }
 
 #dropdown {
@@ -105,6 +181,14 @@ h2 {
 
 h4 {
   margin: 40px, 0;
+}
+
+.review {
+  margin-top: 300px;
+}
+
+hr {
+  margin-top: 0;
 }
 
 #map_restList {

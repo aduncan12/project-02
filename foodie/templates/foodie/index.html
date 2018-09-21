@@ -1,9 +1,12 @@
 {% extends "foodie/base.html" %}
 
 {% block content %}
+<div class='picture3'>
+    <h1>For4ger</h1>
+</div>
 <div class="container">
     <div class="jumbotron picture">
-        <h1>Welcome to Foodie !</h1>
+        <h1>Welcome to 4Ager !</h1>
     {% if user.is_authenticated %}
         <h3>Hello {{ user.username }}</h3>
     {% else %}
@@ -11,8 +14,8 @@
     {% endif %}
     </div>
     <div class='homepage'>
-        <h2>What is Foodie?</h2>
-        <h4>Funny you should ask. Foodie is a full stack web application that allows you to randomly generate a list of five restaurants in your area, based off of your preference. You can even leave a review on a restaurant you have visited before or read review's created by other user's on our platform. Last but not least if you end up going to a place that you absolutely love and can't live without, fear not my friend for you can save that restaurant to your saved restaurants section on your profile page. Foodie was created by four wonderful developer's from General Assembly's Web Development Immersive course in San Francisco, California, whom you can read more about on our about page located <a href="{% url 'about' %}">here</a>. </h4>
+        <h2>What is 4Ager?</h2>
+        <h4>Funny you should ask. 4Ager is a full stack web application that allows you to randomly generate a list of five restaurants in your area, based off of your preference. You can even leave a review on a restaurant you have visited before or read review's created by other user's on our platform. Last but not least if you end up going to a place that you absolutely love and can't live without, fear not my friend for you can save that restaurant to your saved restaurants section on your profile page. 4Ager was created by four wonderful developer's from General Assembly's Web Development Immersive course in San Francisco, California, whom you can read more about on our about page located <a href="{% url 'about' %}">here</a>. </h4>
         <h2>Best app concept you've ever heard of, but don't know how to start?</h2>
         <h4>Well you came to the right place pal, because boy do I have news for you. All you have to do to get started, if you do not have a profile yet, is sign up for an account by filling out the forms <a href="{% url 'register' %}">here</a>. If you already have a profile and for some reason can't remember what to do next, don't trip chocolate chip, because I have a <a href="{% url 'user_login' %}">link</a> to take you exactly where you need to go.</h4>
         <h2>Wow this app looks amazing what technologies did you use?</h2>
