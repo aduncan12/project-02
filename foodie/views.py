@@ -46,10 +46,9 @@ def register(request):
 def userprofile(request):
     user = User.objects.get(id=request.user.id)
     userprofile , created = UserProfile.objects.get_or_create(user=user)
-    print(request.user.id)
-    user_reviews = Review.objects.get(id=request.user.id)
+    user_reviews = Review.objects.all()
     print("REVIEW:")
-    print(user_reviews.content)
+    print(user_reviews)
     return render(request, 'foodie/userprofile.html', {'userprofile': userprofile, 'user_reviews': user_reviews})
 
 @login_required
@@ -111,7 +110,7 @@ def review_view(request, pk):
     review = Review.objects.get(id=pk)
     return render(request, 'foodie/review_view.html', {'review': review})
 
-def user_reviews(request):
-    user_review = Review.objects.get(id=request.user.id)
-    print(user_review)
-    return render(request, 'foodie/userprofile.html', {'user_review': user_review})
+# def user_reviews(request):
+#     user_review = Review.objects.get(id=request.user.id)
+#     print(user_review)
+#     return render(request, 'foodie/userprofile.html', {'user_review': user_review})

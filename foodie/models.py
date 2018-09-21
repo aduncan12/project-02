@@ -36,6 +36,6 @@ class Review(models.Model):
     rating = models.PositiveSmallIntegerField()
 
     def __str__(self):
-        return f'{self.restaurant} {self.content}'
+        return f'{self.restaurant} {self.rating} {self.content} {self.user}'
 
 
