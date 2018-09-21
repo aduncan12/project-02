@@ -1,192 +1,82 @@
+var markers = [];
 $(document).ready(function () {
-    var options = [];
-    $.ajax({
-        method: "GET",
-        url: "preferences",
-        success: function (response) {
-            var cuisines = response["preferences"].join('%2C');
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    var pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
-                    var my_url = `https://developers.zomato.com/api/v2.1/search?lat=${pos.lat}&lon=${pos.lng}&cuisines=${cuisines}`
-                    console.log(my_url)
-                    $.ajax({
-                        url: my_url,
-                        headers: {
-                            "user-key": "f6e6a18b7e1f07fd9821453b651767fb"
-                        },
-                        method: 'GET',
-                        dataType: 'json',
-                        success: function (data) {
-                            console.log(data)
-                            console.log(data.restaurants)
-                            var totalresults = data.restaurants;
-                            if (totalresults.length > 0) {
-                                var newArr = nRandEleArr(totalresults, 4);
-                                console.log(newArr);
-                                newArr.forEach(ele => {
-                                    $('#restList').append(`
-                                    <div>
-                                    <p>Name: ${ele.restaurant.name}</p>
-                                    <img src="${ele.restaurant.featured_image}" width="200em">
-                                    <p>Cuisines: ${ele.restaurant.cuisines}</p>
-                                    <p>Lat: ${ele.restaurant.location.latitude}, Lon: ${ele.restaurant.location.longitude}</p>
-                                    </div>
-                                    `);
-                                    makeMarker(parseFloat(ele.restaurant.location.latitude), parseFloat(ele.restaurant.location.longitude), ele.restaurant.name);
-                                    options.push(ele.restaurant.name)
-                                });
-                            } else {
-                                $('#restList').append(`<h5>no results</h5>`);
+    let map = L.map('map').setView([37.773972, -122.431297], 12);
+
+    let l1 = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: 'pk.eyJ1IjoiYWR1bmNhbjEyIiwiYSI6ImNqbTluM3RuNTAwMW8zcXRhbmU5c3VleHMifQ.tWsz1HZQbMbqHiOXsOoZEQ'
+    }).addTo(map);
+
+    let popup = L.popup();
+
+    function onMapClick(e) {
+        popup
+            .setLatLng(e.latlng)
+            .setContent("You clicked the map at " + e.latlng.toString())
+            .openOn(map);
+    }
+    map.on('click', onMapClick);
+
+    $('#getRestList').on('click', function () {
+        markers.forEach(function(ele) {
+            console.log(ele);
+            map.removeLayer(ele);
+          });
+        $.ajax({
+            method: "GET",
+            url: "preferences",
+            success: function (response) {
+                var cuisines = response["preferences"].join('%2C');
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        initMarker(parseFloat(pos.lat), parseFloat(pos.lng), map);
+                        var my_url = `https://developers.zomato.com/api/v2.1/search?lat=${pos.lat}&lon=${pos.lng}&cuisines=${cuisines}&sort=real_distance`
+                        console.log(my_url)
+                        $.ajax({
+                            url: my_url,
+                            headers: {
+                                "user-key": "f6e6a18b7e1f07fd9821453b651767fb"
+                            },
+                            method: 'GET',
+                            dataType: 'json',
+                            success: function (data) {
+                                console.log(data)
+                                console.log(data.restaurants)
+                                var totalresults = data.restaurants;
+                                if (totalresults.length > 0) {
+                                    var newArr = nRandEleArr(totalresults, 4);
+                                    console.log(newArr);
+                                    newArr.forEach(ele => {
+                                        $('#restList').append(`
+                                        <div>
+                                        <p>Name: ${ele.restaurant.name}</p>
+                                        <img src="${ele.restaurant.featured_image}" width="200em">
+                                        <p>Cuisines: ${ele.restaurant.cuisines}</p>
+                                        <p>Lat: ${ele.restaurant.location.latitude}, Lon: ${ele.restaurant.location.longitude}</p>
+                                        </div>
+                                        `);
+                                        addMarker(parseFloat(ele.restaurant.location.latitude), parseFloat(ele.restaurant.location.longitude), ele.restaurant.name, map);
+                                    });
+                                } else {
+                                    $('#restList').append(`<h5>no results</h5>`);
+                                }
                             }
-                            console.log()
-                        }
+                        });
+                        return pos;
                     });
-                });
+                }
+            },
+            error: function (error) {
+                console.log(error);
             }
-        return pos;
-        },
-        error: function (error) {
-            console.log(error);
-        }
+        });
     });
-
-
-//------------------------------Roulette---------------------------
-
-    var options = ["$100"];
-
-    var startAngle = 0;
-    var arc = Math.PI / (options.length / 2);
-    var spinTimeout = null;
-
-    var spinArcStart = 10;
-    var spinTime = 0;
-    var spinTimeTotal = 0;
-
-    var ctx;
-
-    document.getElementById("spin").addEventListener("click", spin);
-
-    function byte2Hex(n) {
-        var nybHexString = "0123456789ABCDEF";
-        return String(nybHexString.substr((n >> 4) & 0x0F,1)) + nybHexString.substr(n & 0x0F,1);
-    }
-
-    function RGB2Color(r,g,b) {
-        return '#' + byte2Hex(r) + byte2Hex(g) + byte2Hex(b);
-    }
-
-    function getColor(item, maxitem) {
-        var phase = 0;
-        var center = 128;
-        var width = 127;
-        var frequency = Math.PI*2/maxitem;
-        
-        red   = Math.sin(frequency*item+2+phase) * width + center;
-        green = Math.sin(frequency*item+0+phase) * width + center;
-        blue  = Math.sin(frequency*item+4+phase) * width + center;
-        
-        return RGB2Color(red,green,blue);
-    }
-
-    function drawRouletteWheel() {
-        var canvas = document.getElementById("canvas");
-        if (canvas.getContext) {
-            var outsideRadius = 200;
-            var textRadius = 160;
-            var insideRadius = 125;
-
-            ctx = canvas.getContext("2d");
-            ctx.clearRect(0,0,500,500);
-
-            ctx.strokeStyle = "black";
-            ctx.lineWidth = 2;
-
-            ctx.font = 'bold 12px Helvetica, Arial';
-
-            for(var i = 0; i < options.length; i++) {
-            var angle = startAngle + i * arc;
-            //ctx.fillStyle = colors[i];
-            ctx.fillStyle = getColor(i, options.length);
-
-            ctx.beginPath();
-            ctx.arc(250, 250, outsideRadius, angle, angle + arc, false);
-            ctx.arc(250, 250, insideRadius, angle + arc, angle, true);
-            ctx.stroke();
-            ctx.fill();
-
-            ctx.save();
-            ctx.shadowOffsetX = -1;
-            ctx.shadowOffsetY = -1;
-            ctx.shadowBlur    = 0;
-            ctx.shadowColor   = "rgb(220,220,220)";
-            ctx.fillStyle = "black";
-            ctx.translate(250 + Math.cos(angle + arc / 2) * textRadius, 
-                            250 + Math.sin(angle + arc / 2) * textRadius);
-            ctx.rotate(angle + arc / 2 + Math.PI / 2);
-            var text = options[i];
-            ctx.fillText(text, -ctx.measureText(text).width / 2, 0);
-            ctx.restore();
-        } 
-
-        //Arrow
-        ctx.fillStyle = "black";
-        ctx.beginPath();
-        ctx.moveTo(250 - 4, 250 - (outsideRadius + 5));
-        ctx.lineTo(250 + 4, 250 - (outsideRadius + 5));
-        ctx.lineTo(250 + 4, 250 - (outsideRadius - 5));
-        ctx.lineTo(250 + 9, 250 - (outsideRadius - 5));
-        ctx.lineTo(250 + 0, 250 - (outsideRadius - 13));
-        ctx.lineTo(250 - 9, 250 - (outsideRadius - 5));
-        ctx.lineTo(250 - 4, 250 - (outsideRadius - 5));
-        ctx.lineTo(250 - 4, 250 - (outsideRadius + 5));
-        ctx.fill();
-    }
-    }
-
-    function spin() {
-        spinAngleStart = Math.random() * 10 + 10;
-        spinTime = 0;
-        spinTimeTotal = Math.random() * 3 + 4 * 1000;
-        rotateWheel();
-    }
-
-    function rotateWheel() {
-        spinTime += 30;
-        if(spinTime >= spinTimeTotal) {
-            stopRotateWheel();
-            return;
-        }
-        var spinAngle = spinAngleStart - easeOut(spinTime, 0, spinAngleStart, spinTimeTotal);
-        startAngle += (spinAngle * Math.PI / 180);
-        drawRouletteWheel();
-        spinTimeout = setTimeout('rotateWheel()', 30);
-    }
-
-    function stopRotateWheel() {
-        clearTimeout(spinTimeout);
-        var degrees = startAngle * 180 / Math.PI + 90;
-        var arcd = arc * 180 / Math.PI;
-        var index = Math.floor((360 - degrees % 360) / arcd);
-        ctx.save();
-        ctx.font = 'bold 30px Helvetica, Arial';
-        var text = options[index]
-        ctx.fillText(text, 250 - ctx.measureText(text).width / 2, 250 + 10);
-        ctx.restore();
-    }
-
-    function easeOut(t, b, c, d) {
-        var ts = (t/=d)*t;
-        var tc = ts*t;
-        return b+c*(tc + -3*ts + 3*t);
-    }
-
-    drawRouletteWheel();
-
 });
 
 function nRandEleArr(arr, size) {
@@ -197,6 +87,43 @@ function nRandEleArr(arr, size) {
     return [...mySet];
 }
 
-function makeMarker(lat, lng, name){
-    L.marker([lat, lng]).addTo(map).bindPopup(`<b>${name}</b>`);
+function initMap(){
+    let map = L.map('map').setView([37.773972, -122.431297], 12);
+
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: 'pk.eyJ1IjoiYWR1bmNhbjEyIiwiYSI6ImNqbTluM3RuNTAwMW8zcXRhbmU5c3VleHMifQ.tWsz1HZQbMbqHiOXsOoZEQ'
+    }).addTo(map);
+
+    let popup = L.popup();
+
+    function onMapClick(e) {
+        popup
+            .setLatLng(e.latlng)
+            .setContent("You clicked the map at " + e.latlng.toString())
+            .openOn(map);
+    }
+    map.on('click', onMapClick);
+    return map;
+}
+
+function initLayer(map){
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: 'pk.eyJ1IjoiYWR1bmNhbjEyIiwiYSI6ImNqbTluM3RuNTAwMW8zcXRhbmU5c3VleHMifQ.tWsz1HZQbMbqHiOXsOoZEQ'
+    }).addTo(map);
+}
+
+function addMarker(lat, lng, name, map) {
+    var tempM = L.marker([lat, lng]).addTo(map).bindPopup(`<b>${name}</b>`);
+    markers.push(tempM);
+}
+
+function initMarker(lat, lng, map) {
+    var tempM = L.marker([lat, lng]).addTo(map).bindPopup(`<b>You Are Here</b>`).openPopup();
+    markers.push(tempM);
 }
