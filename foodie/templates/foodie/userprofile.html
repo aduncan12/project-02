@@ -5,6 +5,7 @@
 <div class="container">
   <div class="jumbotron">
     <p>Description: {{ userprofile.description }}</p>
+    <!-- <p>Total preferences: {{ userprofile.preferences.all.length }}</p> -->
     <p>Preferences:</p>
     {% for preference in userprofile.preferences.all %}
       <p>{{preference.cuisine}}  -- {{preference.api_id}}</p>

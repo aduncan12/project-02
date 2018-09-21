@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from foodie.forms import UserForm, UserProfileForm, ReviewForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core import serializers
 from django.urls import reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404
 from .models import UserProfile, User, Review
 # Create your views here.
@@ -89,6 +90,19 @@ def user_login(request):
 @login_required
 def restaurants(request):
     return render(request, 'foodie/restaurants.html')
+
+# query preferences by user, put them into array, 
+# format as json object, 
+# display json object in route 'api/users/<int:pk>/preferences'
+def user_preferences(request, pk):
+    user = User.objects.get(id=pk)
+    preferences = user.userprofile.preferences.all()
+    pref_array = []
+    for pref in preferences:
+        print(pref.api_id)
+        pref_array.append(int(pref.api_id))
+    print(pref_array)
+    return JsonResponse({"preferences": pref_array})
 
 @login_required
 def create_review(request):
