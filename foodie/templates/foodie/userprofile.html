@@ -11,7 +11,11 @@
       <p>{{preference.cuisine}}</p>
     {% endfor %}
     <!-- image src only need this project path, os.path is done in settings.py and urls.py -->
-    <img src="{{ user.userprofile.profile_pic.url }}">
+    {% if  user.userprofile.profile_pic.url %}
+      <img src="{{ user.userprofile.profile_pic.url }}">
+    {% else %}
+      <img src="{% static 'images/img_profile.png'%}">
+    {%endif%}
     <h2> {{ user }}'s Reviews</h2>
       <div id="user_reviews">
           {% for review in user_reviews %}
