@@ -12,10 +12,11 @@
     <!-- image src only need this project path, os.path is done in settings.py and urls.py -->
     <img src="{{ user.userprofile.profile_pic.url }}">
     <h1>Reviews</h1>
-    <div>
-      {% block review %}
-      {% endblock %}
-    </div>
+      <div id="user_reviews">
+        <p> Begin Reviews: </p>
+          {{user_reviews.content}}
+        <p> Ends Reviews</p>
+      </div>
   </div>
 </div>
 {% endblock %}
