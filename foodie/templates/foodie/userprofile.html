@@ -10,8 +10,11 @@
     {% for preference in userprofile.preferences.all %}
       <p>{{preference.cuisine}}</p>
     {% endfor %}
-    <!-- image src only need this project path, os.path is done in settings.py and urls.py -->
-    {% if  user.userprofile.profile_pic.url %}
+    <!-- check if user's profile's profile picture exist, 
+      parse the user picture path for img,
+      else use the default picture from static path -->
+    {% if  user.userprofile.profile_pic %}
+      <!-- image src only need this project path, os.path is done in settings.py and urls.py -->
       <img src="{{ user.userprofile.profile_pic.url }}">
     {% else %}
       <img src="{% static 'images/img_profile.png'%}">
