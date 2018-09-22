@@ -25,6 +25,7 @@ $(document).ready(function () {
             map.removeLayer(ele);
         });
         $('#restList').empty();
+        var track_array = [];
         $.ajax({
             method: "GET",
             url: "preferences",
@@ -47,26 +48,29 @@ $(document).ready(function () {
                             method: 'GET',
                             dataType: 'json',
                             success: function (data) {
-                                console.log(data)
-                                console.log(data.restaurants)
+                                // console.log(data)
+                                // console.log(data.restaurants)
                                 var totalresults = data.restaurants;
                                 if (totalresults.length > 0) {
                                     var newArr = nRandEleArr(totalresults, 4);
                                     console.log(newArr);
                                     newArr.forEach(ele => {
+                                        track_array.push(ele);
                                         $('#restList').append(`
                                         <div>
                                         <p>Name: ${ele.restaurant.name}</p>
                                         <img src="${ele.restaurant.featured_image}" width="200em">
                                         <p>Cuisines: ${ele.restaurant.cuisines}</p>
                                         <p>Lat: ${ele.restaurant.location.latitude}, Lon: ${ele.restaurant.location.longitude}</p>
+                                        <input type="submit" value="Save restaurant">
                                         </div>
                                         `);
                                         addMarker(parseFloat(ele.restaurant.location.latitude), parseFloat(ele.restaurant.location.longitude), ele.restaurant.name, map);
                                     });
-                                } else {
-                                    $('#restList').append(`<h5>no results</h5>`);
                                 }
+                            },
+                            error: function (error) {
+                                console.log(error);
                             }
                         });
                         return pos;
@@ -77,6 +81,26 @@ $(document).ready(function () {
                 console.log(error);
             }
         });
+        $('#restList').on('click','input',function(e){
+            e.preventDefault();
+            var idxClicked = $(this).index('input');
+            console.log(track_array[idxClicked]);
+            saveURL = 'save_restaurant'
+            $.ajax({
+                url: saveURL,
+                method: 'POST',
+                data:{
+                    'array':track_array[idxClicked],
+                },
+                dataType: 'json',
+                success:function(json){
+                    console.log(json)
+                },
+                error:function(error){
+                    console.log(error)
+                }
+            })
+        })
     });
 });
 
@@ -86,37 +110,6 @@ function nRandEleArr(arr, size) {
         mySet.add(arr[Math.floor(Math.random() * arr.length)]);
     }
     return [...mySet];
-}
-
-function initMap() {
-    let map = L.map('map').setView([37.773972, -122.431297], 12);
-
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox.streets',
-        accessToken: 'pk.eyJ1IjoiYWR1bmNhbjEyIiwiYSI6ImNqbTluM3RuNTAwMW8zcXRhbmU5c3VleHMifQ.tWsz1HZQbMbqHiOXsOoZEQ'
-    }).addTo(map);
-
-    let popup = L.popup();
-
-    function onMapClick(e) {
-        popup
-            .setLatLng(e.latlng)
-            .setContent("You clicked the map at " + e.latlng.toString())
-            .openOn(map);
-    }
-    map.on('click', onMapClick);
-    return map;
-}
-
-function initLayer(map) {
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox.streets',
-        accessToken: 'pk.eyJ1IjoiYWR1bmNhbjEyIiwiYSI6ImNqbTluM3RuNTAwMW8zcXRhbmU5c3VleHMifQ.tWsz1HZQbMbqHiOXsOoZEQ'
-    }).addTo(map);
 }
 
 function addMarker(lat, lng, name, map) {

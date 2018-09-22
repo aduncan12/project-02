@@ -24,6 +24,14 @@
             <h4>{{review.user}}</h4>
           {% endfor %}
       </div>
+    <h2> {{ user }}'s favourite places</h2>
+    <div id="user_reviews">
+        {% for rest in user_saved_rest %}
+          <h3>{{rest.name}}</h3>
+          <h4>{{rest.cuisine}}</h4>
+          <h4>{{rest.description}}</h4>
+        {% endfor %}
+    </div>
   </div>
 </div>
 {% endblock %}
