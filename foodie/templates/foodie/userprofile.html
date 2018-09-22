@@ -33,6 +33,9 @@
           <h3>{{rest.name}}</h3>
           <h4>{{rest.cuisine}}</h4>
           <h4>{{rest.description}}</h4>
+          <form action="review">
+            <input type="submit" value="Review {{rest.name}}" />
+          </form>
         {% endfor %}
     </div>
   </div>
