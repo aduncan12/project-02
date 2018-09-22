@@ -14,7 +14,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     description = models.TextField(blank=True)
     preferences = models.ManyToManyField(Preference,blank=True)
-    profile_pic = models.ImageField(upload_to='profile_pics',blank=True, default='static/images/img_profile.png')
+    profile_pic = models.ImageField(upload_to='profile_pics',blank=True)
 
     def __str__(self):
         return self.user.username

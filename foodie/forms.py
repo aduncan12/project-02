@@ -17,4 +17,4 @@ class UserProfileForm(forms.ModelForm):
 class ReviewForm(forms.ModelForm):
     class Meta():
         model = Review
-        fields = ('user', 'restaurant', 'content', 'rating')
+        fields = ('restaurant', 'content', 'rating')

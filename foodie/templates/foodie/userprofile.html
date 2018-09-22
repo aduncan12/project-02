@@ -8,10 +8,17 @@
     <!-- <p>Total preferences: {{ userprofile.preferences.all.length }}</p> -->
     <p>Preferences:</p>
     {% for preference in userprofile.preferences.all %}
-    <p>{{preference.cuisine}} -- {{preference.api_id}}</p>
+      <p>{{preference.cuisine}}</p>
     {% endfor %}
-    <!-- image src only need this project path, os.path is done in settings.py and urls.py -->
-    <img src="{{ user.userprofile.profile_pic.url }}">
+    <!-- check if user's profile's profile picture exist, 
+      parse the user picture path for img,
+      else use the default picture from static path -->
+    {% if  user.userprofile.profile_pic %}
+      <!-- image src only need this project path, os.path is done in settings.py and urls.py -->
+      <img src="{{ user.userprofile.profile_pic.url }}">
+    {% else %}
+      <img src="{% static 'images/img_profile.png'%}">
+    {%endif%}
     <h2> {{ user }}'s Reviews</h2>
       <div id="user_reviews">
           {% for review in user_reviews %}
@@ -20,6 +27,14 @@
             <h4>{{review.user}}</h4>
           {% endfor %}
       </div>
+    <h2> {{ user }}'s favourite places</h2>
+    <div id="user_reviews">
+        {% for rest in user_saved_rest %}
+          <h3>{{rest.name}}</h3>
+          <h4>{{rest.cuisine}}</h4>
+          <h4>{{rest.description}}</h4>
+        {% endfor %}
+    </div>
   </div>
 </div>
 {% endblock %}
