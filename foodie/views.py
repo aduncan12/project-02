@@ -1,14 +1,34 @@
+# views.py contain all the logic, it request data from database, pass to template or front end.
+# render() display html to browser
+#   3 parameters:
+#   -request: request passed in
+#   -template_name: html file use the display in route
+#   -response: send back a dictionary to request
+# redirect() launch to another route / url
+#   2 parameters:
+#   -to: either a url or to call views.py function
+#   -arguments: pass variables
+# we use django form to create forms.
+# authenticate() return user object by user name and password.
+# login() save user id in a session, so user don't need to reauthenticate.
+# logout() remove user id in a session.
+# @login_required checks if use is logged in.
+# serializers use to convert django querydict to json, or json to django querydict.
+# reverse url name (urls.py path()'s 3rd parameter) to url (real url like urls.py path()'s 1st parameter)
+# HttpResponse() instead of render a html file, response back a string content.
+# HttpResponseRedirect() after does HttpResponse(), it also does redirect().
+# JsonResponse() when pass in a dictionary, it will serialize to json, if use HttpResponse() we need to serialize dictionary ourself before sending.
+# get_object_or_404() is a queryset, way to filter the object you are querying, when object not found give 404 error
 from django.shortcuts import render, redirect
 from foodie.forms import UserForm, UserProfileForm, ReviewForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.urls import reverse
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, QueryDict
+from django.shortcuts import get_object_or_404
 from .models import UserProfile, User, Review, Restaurant
-from django.http import QueryDict
 from django.views.decorators.csrf import csrf_exempt
-# Create your views here.
 
 def index(request):
     return render(request, 'foodie/index.html')
@@ -92,6 +112,9 @@ def user_login(request):
 def restaurants(request):
     return render(request, 'foodie/restaurants.html')
 
+# get Current logged in user by id: User.objects.get(id=request.user.id)
+# get all preferences of the use: user.userprofile.preferences.all()
+# sent response back serialize given dictionary to json object
 @login_required
 def user_preferences(request):
     if request.method == 'GET':

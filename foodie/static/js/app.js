@@ -1,3 +1,5 @@
+// app.js use map and restaurant apis from mapbox (open street map, leaflet), and zomato.
+
 var markers = [];
 $(document).ready(function () {
     let map = L.map('map').setView([37.773972, -122.431297], 12);
@@ -25,6 +27,11 @@ $(document).ready(function () {
             map.removeLayer(ele);
         });
         $('#restList').empty();
+        // get data from django backend database to frontend use ajax.
+        // request through the route name preferences, 
+        // which is in views.py user_preferences() function,
+        // response is a dictionary with a key name "preferences",
+        // the value is an array of integer represent type of cuisines
         var track_array = [];
         $.ajax({
             method: "GET",

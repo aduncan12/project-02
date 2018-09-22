@@ -1,9 +1,16 @@
+# urls.py in project folder take care the domain name part of url
+# this urls.py in app folder take care of routes there are on the right handside of domain name
+# path() joins the 2 urls.py
+#   3 parameters:
+#   -route: right handside of domain name, to each render html page
+#   -view: refer to function inside views.py, to response to request
+#   -name: identify where to lookup, use by html template, views.py reverse lookup
+# at the bottom + static() is for imagefield, static means public, make those path public
 from django.urls import path
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 
-# the bottom + static() is for imagefield, static means public, make those path public
 urlpatterns = [
     path('', views.index, name="index"),
     path('about/', views.about, name="about"),
@@ -14,7 +21,6 @@ urlpatterns = [
     path('profile_edit', views.profile_edit, name='profile_edit'),
     path('restaurants', views.restaurants, name='restaurants'),
     path('preferences', views.user_preferences, name='preferences'),
-    # path('api/users/<int:pk>/preferences', views.user_preferences, name='user_preferences'),
     path('review', views.create_review, name='review'),
     path('review/<int:pk>', views.review_view, name='review_view'),
     path('save_restaurant',views.save_restaurant, name='save_restaurant')
