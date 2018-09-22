@@ -93,13 +93,26 @@
 - User Reviews
 - Sent an array of prefrence id's to app.js
 
+### 9-21-2018
+- Getting User Reviews on everyone's projects was difficult but we had to drop our databases and start over for it to work.
+- In order to get some changes we learned that we have to clear our cache.
+- Most of our features are done, but we had to form a clear plan for our remaining time.
+
+### 9-22-2018
+- Saved restaurants on user profiles
+- Review button for those restaurants
+- Html Scroll bar for displayed restaurants on generator page
+- User does not need to update profile at all in order to find and save restaurant
+
 ## Challenges/Successes
 
 ### Challenges
 - Getting prefrences on Userprofile to show up as check boxes
 - Sending Json from back end to front end
 - User reviews to show up on userprofile
+- Trouble shooting and debugging
 
 ### Successes
 - Getting database set up quickly
 - Finally setting up the checkbox field for userprofile's prefrences https://stackoverflow.com/questions/1760421/how-can-i-render-a-manytomanyfield-as-checkboxes
+- Being able to intentionally break our code to find errors and fix them
