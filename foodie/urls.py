@@ -22,5 +22,6 @@ urlpatterns = [
     path('restaurants', views.restaurants, name='restaurants'),
     path('preferences', views.user_preferences, name='preferences'),
     path('review', views.create_review, name='review'),
-    path('review/<int:pk>', views.review_view, name='review_view')
+    path('review/<int:pk>', views.review_view, name='review_view'),
+    path('save_restaurant',views.save_restaurant, name='save_restaurant')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

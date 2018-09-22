@@ -25,9 +25,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.urls import reverse
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, QueryDict
 from django.shortcuts import get_object_or_404
-from .models import UserProfile, User, Review
+from .models import UserProfile, User, Review, Restaurant
+from django.views.decorators.csrf import csrf_exempt
 
 def index(request):
     return render(request, 'foodie/index.html')
@@ -64,14 +65,6 @@ def register(request):
 # (django know which userprofile internally) from database 
 # render the userprofile.html, pass in userprofile
 @login_required
-def userprofile(request):
-    user = User.objects.get(id=request.user.id)
-    userprofile , created = UserProfile.objects.get_or_create(user=user)
-    user_id = request.user.id
-    user_reviews = Review.objects.filter(user_id = user_id)
-    return render(request, 'foodie/userprofile.html', {'userprofile': userprofile, 'user_reviews': user_reviews})
-
-@login_required
 def profile_edit(request):
     user = User.objects.get(id=request.user.id)
     user , created = UserProfile.objects.get_or_create(user=user)
@@ -87,6 +80,15 @@ def profile_edit(request):
     else:
         form = UserProfileForm(instance=user)
     return render(request, 'foodie/profileForm.html', {'form': form, 'user': user})
+
+@login_required
+def userprofile(request):
+    user_id = request.user.id
+    user = User.objects.get(id=user_id)
+    userprofile , created = UserProfile.objects.get_or_create(user=user)
+    user_reviews = Review.objects.filter(user_id = user_id)
+    user_saved_rest = Restaurant.objects.filter(user_id = user_id)
+    return render(request, 'foodie/userprofile.html', {'userprofile': userprofile, 'user_reviews': user_reviews,'user_saved_rest':user_saved_rest})
 
 def user_login(request):
     if request.method == 'POST':
@@ -113,6 +115,7 @@ def restaurants(request):
 # get Current logged in user by id: User.objects.get(id=request.user.id)
 # get all preferences of the use: user.userprofile.preferences.all()
 # sent response back serialize given dictionary to json object
+@login_required
 def user_preferences(request):
     if request.method == 'GET':
         user = User.objects.get(id=request.user.id)
@@ -141,3 +144,17 @@ def create_review(request):
 def review_view(request, pk):
     review = Review.objects.get(id=pk)
     return render(request, 'foodie/review_view.html', {'review': review})
+
+@csrf_exempt
+@login_required
+def save_restaurant(request):
+    user = UserProfile.objects.get(id=request.user.id)
+    if request.method == 'POST':
+        restaurant = Restaurant.objects.create(user=user)
+        restaurant.name = QueryDict(request.body)['array[restaurant][name]']
+        restaurant.description = QueryDict(request.body)['array[restaurant][location][address]']
+        restaurant.menu_url = QueryDict(request.body)['array[restaurant][menu_url]']
+        restaurant.cuisine = QueryDict(request.body)['array[restaurant][cuisines]']
+        restaurant.save()
+        return HttpResponse(QueryDict(request.body))
+
