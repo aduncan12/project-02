@@ -128,3 +128,11 @@ function initMarker(lat, lng, map) {
     var tempM = L.marker([lat, lng]).addTo(map).bindPopup(`<b>You Are Here</b>`).openPopup();
     markers.push(tempM);
 }
+function scrollToSection(e) {
+    e.preventDefault();
+    var div = $($(this).attr('href')); 
+    $('html, body').animate({
+      scrollTop: div.offset().top
+    }, 800);
+  }
+  $('[data-scroll]').on('click', scrollToSection);

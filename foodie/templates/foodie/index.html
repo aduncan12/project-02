@@ -3,10 +3,12 @@
 {% block content %}
 <div class='picture3'>
     <h1>4ager</h1>
+    <a data-scroll class="readmore" href=".jumbotron">Read More</a>
 </div>
 <div class="container">
     <div class="jumbotron picture">
         <h1>Welcome to 4Ager !</h1>
+        
     {% if user.is_authenticated %}
         <h3>Hello {{ user.username }}</h3>
     {% else %}
