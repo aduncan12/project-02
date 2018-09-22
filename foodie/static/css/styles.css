@@ -215,7 +215,6 @@ hr {
 }
 
 #restList {
-  display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   width: 25vw;
@@ -224,7 +223,12 @@ hr {
   margin-top: 1%;
   margin-left: 1%;
   margin-right: 5%;
-  font-size: 0.75em;
+  font-size: 1em;
+  overflow-y: auto;
+}
+#restList div {
+  margin-left: 2%;
+  margin-bottom: 5%;
 }
 
 @media only screen and (max-width: 600px) {
