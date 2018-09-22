@@ -20,10 +20,11 @@ $(document).ready(function () {
     map.on('click', onMapClick);
 
     $('#getRestList').on('click', function () {
-        markers.forEach(function(ele) {
+        markers.forEach(function (ele) {
             console.log(ele);
             map.removeLayer(ele);
-          });
+        });
+        $('#restList').empty();
         $.ajax({
             method: "GET",
             url: "preferences",
@@ -87,7 +88,7 @@ function nRandEleArr(arr, size) {
     return [...mySet];
 }
 
-function initMap(){
+function initMap() {
     let map = L.map('map').setView([37.773972, -122.431297], 12);
 
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -109,7 +110,7 @@ function initMap(){
     return map;
 }
 
-function initLayer(map){
+function initLayer(map) {
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
