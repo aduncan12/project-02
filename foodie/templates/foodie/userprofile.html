@@ -10,41 +10,41 @@
   {% else %}
   <img id="profileImg"  src="{% static 'images/img_profile.png'%}">
   {%endif%}
-  <p id="profileDesc">Description: {{ userprofile.description }}</p>
+  <h4 id="profileDesc">Description: {{ userprofile.description }}</h4>
+
   <!-- <p>Total preferences: {{ userprofile.preferences.all.length }}</p> -->
-  <p id="profilePref">Preferences:</p>
-  <div id="preferences">
+  <h3 id="pref">Preferences:</h3>
+  <div id="profilePref">
       {% for preference in userprofile.preferences.all %}
-        <p>{{preference.cuisine}}</p>
+      <h5 id="preferences">{{preference.cuisine}}</h5>
       {% endfor %}
-  </div>
+  </div>    
   <!-- check if user's profile's profile picture exist, 
     parse the user picture path for img,
     else use the default picture from static path -->
-
-  <h2 id="profileReview"> {{ user }}'s Reviews</h2>
-  <div id="user_reviews">
-      {% for review in user_reviews %}
-        <h4>{{review.restaurant}} {{review.rating}}</h4>
-        <p>{{review.content}}</p>
-        <p>{{review.user}}</p>
+  <h3 id="rest"> {{ user }}'s Favorite Places:</h3>
+  <div id="profileRest">
+      <div id="user_saved">
+        {% for rest in user_saved_rest %}
+          <h4>{{rest.name}}</h4>
+          <h5>{{rest.description}}</h5>
+          <h5>{{rest.cuisine}}</h5>
+          <a href="{% url 'restaurant_delete' id=rest.id %}">Remove</a>
+          <a href="{% url 'create_review' pk=rest.id %}">Review {{rest.name}}</a>
         {% endfor %}
-        <form action="review">
-          <input type="submit" value ="Delete Review">
-          <input type="submit" value="Edit {{review.name}}" />
-        </form>
+      </div>
   </div>
-  <h2 id="profileRest"> {{ user }}'s favorite places</h2>
-  <div id="user_saved">
-      {% for rest in user_saved_rest %}
-        <h4>{{rest.name}}</h4>
-        <p>{{rest.description}}</p>
-        <p>{{rest.cuisine}}</p>
-        <form action="review">
-          <input type="submit" value ="Remove">
-          <input type="submit" value="Review" />
-        </form>
-      {% endfor %}
+
+  <h3 id="profileReview"> {{ user }}'s Reviews</h3>
+  <div id="user_reviews">
+    {% for review in user_reviews %}
+      <h4>{{review.restaurant}} {{review.rating}}</h4>
+      <h5>{{review.content}}</h5>
+      <h5>{{review.user}}</h5>
+      <a href="{% url 'review_delete' id=review.id %}">Delete</a>
+      <a href="{% url 'review_edit' id=review.id %}">Edit review</a>
+    {% endfor %}
   </div>
 </div>
+
 {% endblock %}

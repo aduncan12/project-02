@@ -30,9 +30,11 @@ from django.shortcuts import get_object_or_404
 from .models import UserProfile, User, Review, Restaurant
 from django.views.decorators.csrf import csrf_exempt
 
+# render home page
 def index(request):
     return render(request, 'foodie/index.html')
 
+# render about page
 def about(request):
     return  render(request, 'foodie/about.html')
 
@@ -40,11 +42,16 @@ def about(request):
 def special(request):
     return HttpResponse("You are logged in !")
 
+# logout user session, display home page
 @login_required
 def user_logout(request):
     logout(request)
     return redirect('index')
 
+# register() function will signup a new user.
+# we use buildin django form which need to create forms.py, and import it here.
+# in forms.py create UserForm class which will collect form data insert into our model, 
+# registration.html 
 def register(request):
     registered = False
     if request.method == 'POST':
@@ -128,6 +135,7 @@ def user_preferences(request):
         return JsonResponse({"preferences": pref_array})
 
 @login_required
+<<<<<<< HEAD
 def review_edit(request, pk):
     review = Review.objects.get(id=pk)
     if request.method == 'POST':
@@ -141,23 +149,42 @@ def review_edit(request, pk):
 
 @login_required
 def create_review(request):
+=======
+def create_review(request,pk):
+>>>>>>> 21e74d6f334ec33f3901ce855c0a367035af495a
     user = UserProfile.objects.get(id=request.user.id)
+    restaurant = Restaurant.objects.get(id=pk)
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
             review = form.save(commit=False)
             review.user = user
+            review.restaurant = restaurant
             review.save()
             return redirect('userprofile')
         else:
             print('\nform is invalid\n')
     else:
         form = ReviewForm()
-    return render(request, 'foodie/review_form.html', {'form': form})
+    return render(request, 'foodie/review_form.html', {'form': form , 'restaurant':restaurant})
 
+@login_required
 def review_view(request, pk):
     review = Review.objects.get(id=pk)
     return render(request, 'foodie/review_view.html', {'review': review})
+
+@login_required
+def review_edit(request,id):
+    review = Review.objects.get(id=id)
+    if request.method == "POST":
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            review = form.save()
+            review.save()
+            return redirect('userprofile')
+    else:
+        form = ReviewForm(instance=review)
+    return render(request, 'foodie/review_form.html', {'form': form, 'review': review})
 
 @csrf_exempt
 @login_required
