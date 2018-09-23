@@ -29,12 +29,12 @@
                     <li><a class="navbar-link" href="{% url 'index' %}">Home</a></li>
                     <li><a class="navbar-link" href="{% url 'about' %}">About</a></li>
                     {# Some logic on what to display for last item#}
-                    {% if user.is_authenticated %}
+                    {% if request.user.is_authenticated %}
                     <li><a class="navbar-link" href="{% url 'restaurants' %}">Find Restaurant</a></li>
                     <li class="navbar-link" id="dropdown">
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Signed in as {{user.username}}
+                                Signed in as {{request.user.username}}
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <ul>
@@ -55,7 +55,7 @@
         <!-- <img id="headerImage" src="{% static 'images/sushi.jpeg' %}" alt="sushi"> -->
         <!-- <img src="/static/images/italian-pizza-restaurant-italy.jpg" alt="restaurant"> -->
 
-        <div>
+        <div id="content">
             {% block content %}
             {% endblock %}
         </div>
