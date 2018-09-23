@@ -110,6 +110,8 @@ def user_login(request):
 
 @login_required
 def restaurants(request):
+    user = User.objects.get(id=request.user.id)
+    userprofile , created = UserProfile.objects.get_or_create(user=user)
     return render(request, 'foodie/restaurants.html')
 
 # get Current logged in user by id: User.objects.get(id=request.user.id)
@@ -150,6 +152,10 @@ def review_view(request, pk):
 def save_restaurant(request):
     user = UserProfile.objects.get(id=request.user.id)
     if request.method == 'POST':
+        checkRest = Restaurant.objects.filter(name=QueryDict(request.body)['array[restaurant][name]'])
+        print(list(checkRest))
+        if QueryDict(request.body)['array[restaurant][name]'] not in checkRest:
+            print("Create")
         restaurant = Restaurant.objects.create(user=user)
         restaurant.name = QueryDict(request.body)['array[restaurant][name]']
         restaurant.description = QueryDict(request.body)['array[restaurant][location][address]']
@@ -157,3 +163,4 @@ def save_restaurant(request):
         restaurant.cuisine = QueryDict(request.body)['array[restaurant][cuisines]']
         restaurant.save()
         return HttpResponse(QueryDict(request.body))
+
