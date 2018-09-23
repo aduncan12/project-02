@@ -26,6 +26,13 @@
           <h4>{{review.restaurant}} {{review.rating}}</h4>
           <p>{{review.content}}</p>
           <p>{{review.user}}</p>
+        {% for rest in user_saved_rest %}
+          <h3>{{rest.name}}</h3>
+          <h4>{{rest.cuisine}}</h4>
+          <h4>{{rest.description}}</h4>
+          <form action="review">
+            <input type="submit" value="Review {{rest.name}}" />
+          </form>
         {% endfor %}
     </div>
   <h2 id="profileRest"> {{ user }}'s favorite places</h2>
