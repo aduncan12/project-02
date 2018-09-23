@@ -30,9 +30,11 @@ from django.shortcuts import get_object_or_404
 from .models import UserProfile, User, Review, Restaurant
 from django.views.decorators.csrf import csrf_exempt
 
+# render home page
 def index(request):
     return render(request, 'foodie/index.html')
 
+# render about page
 def about(request):
     return  render(request, 'foodie/about.html')
 
@@ -40,11 +42,16 @@ def about(request):
 def special(request):
     return HttpResponse("You are logged in !")
 
+# logout user session, display home page
 @login_required
 def user_logout(request):
     logout(request)
     return redirect('index')
 
+# register() function will signup a new user.
+# we use buildin django form which need to create forms.py, and import it here.
+# in forms.py create UserForm class which will collect form data insert into our model, 
+# registration.html 
 def register(request):
     registered = False
     if request.method == 'POST':
@@ -110,6 +117,8 @@ def user_login(request):
 
 @login_required
 def restaurants(request):
+    user = User.objects.get(id=request.user.id)
+    userprofile , created = UserProfile.objects.get_or_create(user=user)
     return render(request, 'foodie/restaurants.html')
 
 # get Current logged in user by id: User.objects.get(id=request.user.id)
@@ -150,6 +159,10 @@ def review_view(request, pk):
 def save_restaurant(request):
     user = UserProfile.objects.get(id=request.user.id)
     if request.method == 'POST':
+        checkRest = Restaurant.objects.filter(name=QueryDict(request.body)['array[restaurant][name]'])
+        print(list(checkRest))
+        if QueryDict(request.body)['array[restaurant][name]'] not in checkRest:
+            print("Create")
         restaurant = Restaurant.objects.create(user=user)
         restaurant.name = QueryDict(request.body)['array[restaurant][name]']
         restaurant.description = QueryDict(request.body)['array[restaurant][location][address]']
@@ -157,3 +170,13 @@ def save_restaurant(request):
         restaurant.cuisine = QueryDict(request.body)['array[restaurant][cuisines]']
         restaurant.save()
         return HttpResponse(QueryDict(request.body))
+
+@login_required
+def review_delete(request, id):
+    Review.objects.get(id=id).delete()
+    return redirect('userprofile')
+
+@login_required
+def restaurant_delete(request, id):
+    Restaurant.objects.get(id=id).delete()
+    return redirect('userprofile')

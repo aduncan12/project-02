@@ -47,6 +47,19 @@
           <p>{{review.content}}</p>
           <p>{{review.user}}</p>
           {% endfor %}
+<<<<<<< HEAD
+=======
+
+        {% for rest in user_saved_rest %}
+          <h3>{{rest.name}}</h3>
+          <h4>{{rest.cuisine}}</h4>
+          <h4>{{rest.description}}</h4>
+          <form action="review">
+              <input type="submit" value ="Remove">
+            <input type="submit" value="Review {{rest.name}}" />
+          </form>
+        {% endfor %}
+>>>>>>> 37c3e06ecce4cfb8de71d24dcbbd3d026d52b3dd
     </div>
 </div>
 {% endblock %}
