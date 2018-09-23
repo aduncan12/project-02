@@ -49,9 +49,17 @@ def user_logout(request):
     return redirect('index')
 
 # register() function will signup a new user.
-# we use buildin django form which need to create forms.py, and import it here.
-# in forms.py create UserForm class which will collect form data insert into our model, 
-# registration.html 
+# these 3 things work together: froms.py UserForm class, views.py register() function, and registration.html
+# this control how froms.py UserForm work with registration.html.
+# registered vaiable tell if new user finished registration.
+# check if registration.html's form method type is POST (means hit submit),
+#   create new instance of UserForm link to UserForm(), get form data with request.POST,
+#   is_valid() is buildin checks for form input and duplicarte user, etc..., 
+#   save() will save form data to the database, then assign to another variable user,
+#   set_password() will hash the password, then save to database again, now user is registered.
+#   user_form.errors will give some buildin error message,
+# else if not a POST reqiest, we going to link to empty UserForm(),
+# render registration.html, pass in user_form, and registered
 def register(request):
     registered = False
     if request.method == 'POST':
@@ -67,10 +75,22 @@ def register(request):
         user_form = UserForm()
     return render(request, 'foodie/registration.html', {'user_form':user_form,'registered':registered})
 
-# when urls.pv access userprofile route, 
-# this function get 1 userprofile data that match current user id (pk),
-# (django know which userprofile internally) from database 
-# render the userprofile.html, pass in userprofile
+# when urls.py access userprofile route, 
+# @login_required will make sure there is a registered user.
+# get() return 1 user that match current user id (pk), assign to user variable,
+# get_or_create() return a tuple, 1 userprofile and 1 boolean,
+#   if user created userprofile in database, retrieve that userprofile and created = false, 
+#   else create new an empty userprofile for that use and created = true,
+#   user.save() will save userprofile to database.
+#   when profileForm.html form submit POST request to forms.py UserProfileForm, 
+#       pass in form field data,
+#       pass in 'instance' keyword with this userprofile's user,
+#   if form data is_valid() then save() to database,
+#       request.FILES is keyword similar to request.POS, it checks the files instead of input field,
+#       it take new uploaded image to replace the existing image, and save to database,
+#       redirect to userprofile page,
+#   else not a POST request then link to empty forms.py UserProfileForm,
+# render the userprofile.html, pass in UserProfileForm and userprofile.
 @login_required
 def profile_edit(request):
     user = User.objects.get(id=request.user.id)
