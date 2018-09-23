@@ -30,9 +30,11 @@ from django.shortcuts import get_object_or_404
 from .models import UserProfile, User, Review, Restaurant
 from django.views.decorators.csrf import csrf_exempt
 
+# render home page
 def index(request):
     return render(request, 'foodie/index.html')
 
+# render about page
 def about(request):
     return  render(request, 'foodie/about.html')
 
@@ -40,11 +42,16 @@ def about(request):
 def special(request):
     return HttpResponse("You are logged in !")
 
+# logout user session, display home page
 @login_required
 def user_logout(request):
     logout(request)
     return redirect('index')
 
+# register() function will signup a new user.
+# we use buildin django form which need to create forms.py, and import it here.
+# in forms.py create UserForm class which will collect form data insert into our model, 
+# registration.html 
 def register(request):
     registered = False
     if request.method == 'POST':
