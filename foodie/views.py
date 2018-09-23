@@ -163,3 +163,13 @@ def save_restaurant(request):
         restaurant.cuisine = QueryDict(request.body)['array[restaurant][cuisines]']
         restaurant.save()
         return HttpResponse(QueryDict(request.body))
+
+@login_required
+def review_delete(request, id):
+    Review.objects.get(id=id).delete()
+    return redirect('userprofile')
+
+@login_required
+def restaurant_delete(request, id):
+    Restaurant.objects.get(id=id).delete()
+    return redirect('userprofile')

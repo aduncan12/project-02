@@ -62,14 +62,15 @@ $(document).ready(function () {
                                     var newArr = nRandEleArr(totalresults, 4);
                                     console.log(newArr);
                                     newArr.forEach(ele => {
+                                        console.log(ele)
                                         track_array.push(ele);
                                         $('#restList').append(`
                                         <div>
-                                        <p>Name: ${ele.restaurant.name}</p>
-                                        <img src="${ele.restaurant.featured_image}" width="200em">
-                                        <p>Cuisines: ${ele.restaurant.cuisines}</p>
-                                        <p>Lat: ${ele.restaurant.location.latitude}, Lon: ${ele.restaurant.location.longitude}</p>
-                                        <input type="submit" value="Save restaurant">
+                                            <p>Name: ${ele.restaurant.name}</p>
+                                            <img src="${ele.restaurant.featured_image}" width="200em">
+                                            <p>Cuisines: ${ele.restaurant.cuisines}</p>
+                                            <p>${ele.restaurant.location.address}, ${ele.restaurant.location.locality}</p>
+                                            <input type="submit" value="Save restaurant">
                                         </div>
                                         `);
                                         addMarker(parseFloat(ele.restaurant.location.latitude), parseFloat(ele.restaurant.location.longitude), ele.restaurant.name, map);
@@ -132,7 +133,7 @@ function scrollToSection(e) {
     e.preventDefault();
     var div = $($(this).attr('href')); 
     $('html, body').animate({
-      scrollTop: div.offset().top
+        scrollTop: div.offset().top
     }, 800);
-  }
-  $('[data-scroll]').on('click', scrollToSection);
+}
+$('[data-scroll]').on('click', scrollToSection);
