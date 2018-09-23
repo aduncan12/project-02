@@ -128,34 +128,46 @@ def user_preferences(request):
         return JsonResponse({"preferences": pref_array})
 
 @login_required
-def create_review(request):
+def create_review(request,pk):
     user = UserProfile.objects.get(id=request.user.id)
+    restaurant = Restaurant.objects.get(id=pk)
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
             review = form.save(commit=False)
             review.user = user
+            review.restaurant = restaurant
             review.save()
             return redirect('userprofile')
         else:
             print('\nform is invalid\n')
     else:
         form = ReviewForm()
-    return render(request, 'foodie/review_form.html', {'form': form})
+    return render(request, 'foodie/review_form.html', {'form': form , 'restaurant':restaurant})
 
+@login_required
 def review_view(request, pk):
     review = Review.objects.get(id=pk)
     return render(request, 'foodie/review_view.html', {'review': review})
+
+@login_required
+def review_edit(request,id):
+    review = Review.objects.get(id=id)
+    if request.method == "POST":
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            review = form.save()
+            review.save()
+            return redirect('userprofile')
+    else:
+        form = ReviewForm(instance=review)
+    return render(request, 'foodie/review_form.html', {'form': form, 'review': review})
 
 @csrf_exempt
 @login_required
 def save_restaurant(request):
     user = UserProfile.objects.get(id=request.user.id)
     if request.method == 'POST':
-        checkRest = Restaurant.objects.filter(name=QueryDict(request.body)['array[restaurant][name]'])
-        print(list(checkRest))
-        if QueryDict(request.body)['array[restaurant][name]'] not in checkRest:
-            print("Create")
         restaurant = Restaurant.objects.create(user=user)
         restaurant.name = QueryDict(request.body)['array[restaurant][name]']
         restaurant.description = QueryDict(request.body)['array[restaurant][location][address]']

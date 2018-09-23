@@ -13,39 +13,34 @@
   <p id="profileDesc">Description: {{ userprofile.description }}</p>
   <!-- <p>Total preferences: {{ userprofile.preferences.all.length }}</p> -->
   <p id="profilePref">Preferences:</p>
-  {% for preference in userprofile.preferences.all %}
-    <p id="preferences">{{preference.cuisine}}</p>
-  {% endfor %}
+  <div id="preferences">
+      {% for preference in userprofile.preferences.all %}
+        <p>{{preference.cuisine}}</p>
+      {% endfor %}
+  </div>
   <!-- check if user's profile's profile picture exist, 
     parse the user picture path for img,
     else use the default picture from static path -->
 
   <h2 id="profileReview"> {{ user }}'s Reviews</h2>
-    <div id="user_reviews">
-        {% for review in user_reviews %}
-          <h4>{{review.restaurant}} {{review.rating}}</h4>
-          <p>{{review.content}}</p>
-          <p>{{review.user}}</p>
-          {% endfor %}
-
-        {% for rest in user_saved_rest %}
-          <h3>{{rest.name}}</h3>
-          <h4>{{rest.cuisine}}</h4>
-          <h4>{{rest.description}}</h4>
-          <form action="review">
-              <input type="submit" value ="Remove">
-            <input type="submit" value="Review {{rest.name}}" />
-          </form>
-        {% endfor %}
-    </div>
+  <div id="user_reviews">
+      {% for review in user_reviews %}
+        <h4>{{review.restaurant}} {{review.rating}}</h4>
+        <p>{{review.content}}</p>
+        <p>{{review.user}}</p>
+        <a href="{% url 'review_delete' id=review.id %}">Delete</a>
+        <a href="{% url 'review_edit' id=review.id %}">Edit review</a>
+      {% endfor %}
+  </div>
   <h2 id="profileRest"> {{ user }}'s favorite places</h2>
   <div id="user_saved">
       {% for rest in user_saved_rest %}
         <h4>{{rest.name}}</h4>
         <p>{{rest.description}}</p>
         <p>{{rest.cuisine}}</p>
+        <a href="{% url 'restaurant_delete' id=rest.id %}">Remove</a>
+        <a href="{% url 'create_review' pk=rest.id %}">Review {{rest.name}}</a>
       {% endfor %}
-  </div>
   </div>
 </div>
 {% endblock %}

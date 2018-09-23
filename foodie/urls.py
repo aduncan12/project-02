@@ -17,12 +17,17 @@ urlpatterns = [
     path('register', views.register, name='register'),
     path('login', views.user_login, name="user_login"),
     path('logout', views.user_logout, name='logout'),
+
     path('userprofile', views.userprofile, name='userprofile'),
     path('profile_edit', views.profile_edit, name='profile_edit'),
     path('restaurants', views.restaurants, name='restaurants'),
     path('preferences', views.user_preferences, name='preferences'),
-    path('review', views.create_review, name='review'),
+
+    path('restaurant/<int:pk>/review/new', views.create_review, name='create_review'),
     path('review/<int:pk>', views.review_view, name='review_view'),
-    path('review/<int:pk>/delete', views.review_delete, name='review_delete'),
+    path('review/<int:id>/edit', views.review_edit, name='review_edit'),
+    path('review/<int:id>/delete', views.review_delete, name='review_delete'),
+    path('restaurant/<int:id>/delete', views.restaurant_delete, name='restaurant_delete'),
+
     path('save_restaurant',views.save_restaurant, name='save_restaurant')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
