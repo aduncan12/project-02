@@ -1,3 +1,7 @@
+body {
+  background-color: rgba(204, 204, 204, 0.495);
+}
+
 #teamfoodie {
   text-align: center;
 }
@@ -197,20 +201,21 @@ hr {
   flex-direction: row;
   align-content: space-between;
   justify-content: space-between;
+  margin-top: 55px;
 }
 
 #getRestList {
   display: block;
-  margin: 0 auto;
-  margin-top: 60px;
+  margin-left: 10%;
+  margin-top: 25px;
+  z-index: 2;
+  position: absolute;
 }
 
 #map {
-  width: 75vw;
-  height: 85vh;
+  width: 100vw;
+  height: 88vh;
   z-index: 1;
-  margin-left: 5%;
-  margin-top: 1%;
   margin-right: 1%;
 }
 
@@ -220,9 +225,7 @@ hr {
   width: 25vw;
   height: 85vh;
   z-index: 1;
-  margin-top: 1%;
   margin-left: 1%;
-  margin-right: 5%;
   font-size: 1em;
   overflow-y: auto;
 }
@@ -231,19 +234,43 @@ hr {
   margin-bottom: 5%;
 }
 
-@media only screen and (max-width: 600px) {
-  #map_restList {
-    height: 150vh;
-    display: flex;
-    flex-direction: column;
-    align-content: space-between;
-    justify-content: space-between;
-  }
-
-  #restList {
-    flex-wrap: none;
-    flex-direction: column;
-  }
+#profile {
+  margin-top: 100px;
+  display: grid;
+  grid-template-rows: 70px 400px 70px 400px 70px 400px;
+  grid-template-columns: repeat(2, 49%);
+  grid-gap: 2% 2%;
+}
+#profile #profileHeader {
+  grid-area: 1/span 2;
+}
+#profile #profileImg {
+  grid-area: 2/1;
+}
+#profile #profileDesc {
+  grid-area: 2/2;
+}
+#profile #profilePref {
+  grid-area: 3/1;
+}
+#profile #profileRest {
+  grid-area: 3/2;
+  overflow-y: auto;
+}
+#profile #preferences {
+  grid-area: 4/1;
+  overflow-y: auto;
+}
+#profile #user_saved {
+  grid-area: 4/2;
+  overflow-y: auto;
+}
+#profile #profileReview {
+  grid-area: 5/1;
+}
+#profile #user_reviews {
+  grid-area: 6/span 2;
+  overflow-y: auto;
 }
 
 /*# sourceMappingURL=styles.css.map */
