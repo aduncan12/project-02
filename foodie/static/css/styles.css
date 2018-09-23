@@ -237,7 +237,7 @@ hr {
 #profile {
   margin-top: 100px;
   display: grid;
-  grid-template-rows: 70px 400px 70px 400px 70px 400px;
+  grid-template-rows: 70px 400px;
   grid-template-columns: repeat(2, 49%);
   grid-gap: 2% 2%;
 }
@@ -250,26 +250,24 @@ hr {
 #profile #profileDesc {
   grid-area: 2/2;
 }
-#profile #profilePref {
-  grid-area: 3/1;
+
+#profile2, #profile3 {
+  display: flex;
+  height: 50vh;
 }
-#profile #profileRest {
-  grid-area: 3/2;
+
+#profile3 {
+  flex-direction: column;
   overflow-y: auto;
 }
-#profile #preferences {
-  grid-area: 4/1;
+
+#profilePref {
+  width: 50%;
   overflow-y: auto;
 }
-#profile #user_saved {
-  grid-area: 4/2;
-  overflow-y: auto;
-}
-#profile #profileReview {
-  grid-area: 5/1;
-}
-#profile #user_reviews {
-  grid-area: 6/span 2;
+
+#profileRest {
+  width: 50%;
   overflow-y: auto;
 }
 

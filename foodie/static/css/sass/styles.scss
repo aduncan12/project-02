@@ -248,7 +248,7 @@ overflow-y: auto;
 #profile {
     margin-top: 100px;
     display: grid;
-    grid-template-rows: 70px 400px 70px 400px 70px 400px;
+    grid-template-rows: 70px 400px;
     grid-template-columns: repeat(2, 49%);
     grid-gap: 2% 2%;
     #profileHeader{
@@ -260,28 +260,27 @@ overflow-y: auto;
     #profileDesc {
         grid-area: 2 / 2;
     }
-    #profilePref {
-        grid-area: 3 / 1;
-    }
-    #profileRest {
-        grid-area: 3 / 2;
-        overflow-y: auto;
-    }
-    #preferences {
-        grid-area: 4 / 1;
-        overflow-y: auto;
-    }
-    #user_saved {
-        grid-area: 4 / 2;
-        overflow-y: auto;
-    }
-    #profileReview {
-        grid-area: 5 / 1;
-    }
-    #user_reviews {
-        grid-area: 6 / span 2;
-        overflow-y: auto;
-    }
+}
+
+#profile2, #profile3 {
+    display: flex;
+    height: 50vh;
+}
+
+#profile3 {
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+#profilePref {
+    width: 50%;
+    overflow-y: auto;
+
+}
+
+#profileRest {
+    width: 50%;
+    overflow-y: auto;
 }
 
 .readmore{
