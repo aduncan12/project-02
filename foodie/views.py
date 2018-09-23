@@ -10,6 +10,7 @@
 #   -arguments: pass variables
 # we use django form to create forms.
 # authenticate() return user object by user name and password.
+# is_active() ture is good, false is like black list user but not deleted.
 # login() save user id in a session, so user don't need to reauthenticate.
 # logout() remove user id in a session.
 # @login_required checks if use is logged in.
@@ -75,6 +76,7 @@ def register(request):
         user_form = UserForm()
     return render(request, 'foodie/registration.html', {'user_form':user_form,'registered':registered})
 
+# update userprofile for existing user. 
 # when urls.py access userprofile route, 
 # @login_required will make sure there is a registered user.
 # get() return 1 user that match current user id (pk), assign to user variable,
@@ -108,6 +110,10 @@ def profile_edit(request):
         form = UserProfileForm(instance=user)
     return render(request, 'foodie/profileForm.html', {'form': form, 'user': user})
 
+# display user userprofile in userprofile.html.
+# the page show userprofile, user reviews, user saved restaurants.
+# userprofile can be empty (read profile_edit for more info),
+# objects.filter() filter query by user_id.
 @login_required
 def userprofile(request):
     user_id = request.user.id
@@ -117,6 +123,7 @@ def userprofile(request):
     user_saved_rest = Restaurant.objects.filter(user_id = user_id)
     return render(request, 'foodie/userprofile.html', {'userprofile': userprofile, 'user_reviews': user_reviews,'user_saved_rest':user_saved_rest})
 
+# authenticate login user from login.html
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
