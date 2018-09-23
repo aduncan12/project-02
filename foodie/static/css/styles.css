@@ -178,13 +178,8 @@ body {
   margin-top: 0;
 }
 
-h2 {
-  border-bottom: solid grey 1px;
-  padding-bottom: 4px;
-}
-
-h4 {
-  margin: 40px, 0;
+h4, h5 {
+  margin: 2%;
 }
 
 .review {
@@ -235,42 +230,69 @@ hr {
 }
 
 #profile {
-  margin-top: 100px;
+  margin-top: 70px;
+  margin-right: 2%;
+  margin-left: 2%;
+  margin-bottom: 2%;
   display: grid;
-  grid-template-rows: 70px 400px 70px 400px 70px 400px;
+  grid-template-rows: 70px 350px 70px 200px 70px 400px;
   grid-template-columns: repeat(2, 49%);
-  grid-gap: 2% 2%;
+  grid-gap: 3% 2%;
+  border: 2px solid;
+  border-radius: 10px;
+  background-color: #FFFFFF;
 }
 #profile #profileHeader {
   grid-area: 1/span 2;
+  margin: auto;
 }
 #profile #profileImg {
   grid-area: 2/1;
+  border: 1px solid;
+  margin: auto;
 }
 #profile #profileDesc {
   grid-area: 2/2;
+  margin: 5%;
+  border: 1px solid;
+  border-radius: 10px;
+}
+#profile #pref {
+  grid-area: 3/1;
+  margin: auto;
+}
+#profile #rest {
+  grid-area: 3/2;
+  margin: auto;
 }
 #profile #profilePref {
-  grid-area: 3/1;
-}
-#profile #profileRest {
-  grid-area: 3/2;
-  overflow-y: auto;
-}
-#profile #preferences {
   grid-area: 4/1;
   overflow-y: auto;
+  margin: 2% 5%;
+  border: 1px solid;
+  border-radius: 10px;
 }
-#profile #user_saved {
+#profile #profileRest {
   grid-area: 4/2;
   overflow-y: auto;
+  margin: 2% 5%;
+  border: 1px solid;
+  border-radius: 10px;
 }
 #profile #profileReview {
-  grid-area: 5/1;
+  grid-area: 5/span 2;
+  margin: auto;
 }
 #profile #user_reviews {
   grid-area: 6/span 2;
   overflow-y: auto;
+  margin: 2% 5%;
+  border: 1px solid;
+  border-radius: 10px;
+}
+
+#user_saved, #preferences {
+  margin: 2%;
 }
 
 .readmore {
