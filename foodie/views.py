@@ -163,4 +163,3 @@ def save_restaurant(request):
         restaurant.cuisine = QueryDict(request.body)['array[restaurant][cuisines]']
         restaurant.save()
         return HttpResponse(QueryDict(request.body))
-

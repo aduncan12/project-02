@@ -1,3 +1,7 @@
+body {
+    background-color: rgba(204, 204, 204, 0.495);
+}
+
 #teamfoodie{
     text-align: center;
 }
@@ -70,25 +74,25 @@
     height: 180px;
     margin-top: 100px;
     margin-bottom: 10px;
-  }
-  
+}
+
 .picture2{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: transparent;
-  background-position: 50% 50%;
-  background-image: url("../images/veggies.jpg");
-  min-height: 0px;
-  height: 90vh;
-  margin-top: 100px;
-  margin-bottom: 10px;
-  margin: 0;
-  margin-right: 0;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: transparent;
+    background-position: 50% 50%;
+    background-image: url("../images/veggies.jpg");
+    min-height: 0px;
+    height: 90vh;
+    margin-top: 100px;
+    margin-bottom: 10px;
+    margin: 0;
+    margin-right: 0;
+    width: 100%;
 }
 
 .picture3{
@@ -116,11 +120,13 @@
     margin: 0;
     margin-right: 0;
     width: 100%;
-  }
+}
+
 .jumbotron{
     
     margin-top: 100px;
 }
+
 .picture4{
     display: flex;
     flex-direction: column;
@@ -138,12 +144,13 @@
     margin: 0;
     margin-right: 0;
     width: 100%;
-  }
+}
 .jumbotron.review{
         padding: 20px;
         margin: 100px;
         height: 50vh;
     }
+
 #id_content{
     height: 50px;
 }
@@ -172,64 +179,127 @@ h2{
 h4{
     margin: 40px, 0;
 }
+
 .review{
     margin-top: 300px;
 }
+
 hr{
     margin-top: 0;
 }
-#map_restList{
-    height: 90vh;
-    display: flex;
-    flex-direction: row;
-    align-content: space-between;
-    justify-content: space-between;
-    // grid-template-columns: 1fr, 3fr;
-    // grid-template-rows: 1fr;
+
+#map_restList {
+height: 90vh;
+display: flex;
+flex-direction: row;
+align-content: space-between;
+justify-content: space-between;
+margin-top: 55px;
 }
 
-#getRestList{
+#getRestList {
     display: block;
-    margin: 0 auto;
-    margin-top: 60px;
-}
+    margin-left: 10%;
+    margin-top: 25px;
+    z-index: 2;
+    position: absolute;
+    }
 
 #map {
-    flex: 2;
-    // width: 70%;
-    // height: 80vh;
-    z-index: 1;
-    margin-left: 100px;
-    margin-right: 100px;
-    margin-bottom: 20px;
-    margin-top: 20px;
+width: 100vw;
+height: 88vh;
+z-index: 1;
+// margin-left: 5%;
+// margin-top: 1%;
+margin-right: 1%;
 }
 
-#restList{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    // width: 70%;
-    // height: 80vh;
-    z-index: 1;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 100px;
+#restList {
+    div {
+        margin-left: 2%;
+        margin-bottom: 5%;
+    }
+flex-direction: column;
+flex-wrap: wrap;
+width: 25vw;
+height: 85vh;
+z-index: 1;
+// margin-top: 1%;
+margin-left: 1%;
+// margin-right: 5%;
+font-size: 1em;
+overflow-y: auto;
 }
 
-@media only screen and (max-width: 600px) {
-    #map_restList{
-        height: 150vh;
-        display: flex;
-        flex-direction: column;
-        align-content: space-between;
-        justify-content: space-between;
+// @media only screen and (max-width: 600px) {
+// #map_restList{
+// height: 150vh;
+// display: flex;
+// flex-direction: column;
+// align-content: space-between;
+// justify-content: space-between;
+// }
+
+// #restList{
+// flex-wrap: none;
+// flex-direction: column;
+// }}
+
+#profile {
+    margin-top: 100px;
+    display: grid;
+    grid-template-rows: 70px 400px 70px 400px 70px 400px;
+    grid-template-columns: repeat(2, 49%);
+    grid-gap: 2% 2%;
+    #profileHeader{
+        grid-area: 1 / span 2;
     }
-   
-    #restList{
-        flex-wrap: none;
-        flex-direction: column;
+    #profileImg {
+        grid-area: 2 / 1;
+    }
+    #profileDesc {
+        grid-area: 2 / 2;
+    }
+    #profilePref {
+        grid-area: 3 / 1;
+    }
+    #profileRest {
+        grid-area: 3 / 2;
+        overflow-y: auto;
+    }
+    #preferences {
+        grid-area: 4 / 1;
+        overflow-y: auto;
+    }
+    #user_saved {
+        grid-area: 4 / 2;
+        overflow-y: auto;
+    }
+    #profileReview {
+        grid-area: 5 / 1;
+    }
+    #user_reviews {
+        grid-area: 6 / span 2;
+        overflow-y: auto;
     }
 }
+
+.readmore{
+    color: white;
+    font-family: 'Chicle';
+    font-size: 38px;
+    margin-top: 100px;
+}
+
+.readmore:hover{
+    color:white;
+}
+
+.readmore:visited{
+    color:white;
+}
+
+.readmore:active{
+    color:white;
+}
+
