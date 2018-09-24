@@ -75,13 +75,28 @@ $(document).ready(function () {
                                         }
                                         $('#restList').append(`
                                         <div>
-                                        <p>Name: ${ele.restaurant.name}</p>
-                                        <img src="${image}" width="200em">
-                                        <p>Cuisines: ${ele.restaurant.cuisines}</p>
-                                        <p>Address: ${ele.restaurant.location.address}</p>
-                                        <input type="submit" value="Save restaurant">
+                                            <p>Name: ${ele.restaurant.name}</p>
+                                            <img src="${image}" width="200em">
+                                            <p>Cuisines: ${ele.restaurant.cuisines}</p>
+                                            <p>Address: ${ele.restaurant.location.address}</p>
+                                            <input type="submit" value="Save restaurant">
+                                            <button type="button" data-toggle="modal" data-target="#myModal">Read more</button>
                                         </div>
                                         `);
+                                        $('#readmore').append(`
+                                        <div class="modal fade bd-example-modal-sm" tabindex="-1" id="myModal" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog modal-sm">
+                                            <div class="modal-content" id="resModal">
+                                                <p>${ele.restaurant.name}</p>
+                                                <img src="${image}" width="200em">
+                                                <p>Cuisines: ${ele.restaurant.cuisines}</p>
+                                                <p>Address: ${ele.restaurant.location.address}</p>
+                                                <p>Menu: <a href="${ele.restaurant.menu_url}">${ele.restaurant.name} Menu </a></p>
+                                                <p>Average cost for two: ${ele.restaurant.average_cost_for_two}</p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        `)
                                         addMarker(parseFloat(ele.restaurant.location.latitude), parseFloat(ele.restaurant.location.longitude), ele.restaurant.name, map);
                                     });
                                 }else{
@@ -123,7 +138,7 @@ $(document).ready(function () {
                     console.log(error)
                 }
             })
-        })
+        }) 
     });
 });
 
