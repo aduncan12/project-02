@@ -1,3 +1,7 @@
+<!-- after new user registered, say thank you, 
+enctype="multipart/form-data" method="POST" it encode form input data for POST request, 
+csrf_token makes your forms secure,
+user_form.as_p will populate each form fields. -->
 {% extends "foodie/base.html" %}
 {% load staticfiles %}
 {% block content %}
@@ -14,7 +18,7 @@
             <form enctype="multipart/form-data" method="POST">
             {% csrf_token %}
             {{ user_form.as_p }}
-            {{ profile_form.as_p }}
+            <!-- {{ profile_form.as_p }} -->
             <input type="submit" name="" value="Register">
             </form>
             

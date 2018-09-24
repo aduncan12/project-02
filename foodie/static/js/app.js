@@ -1,9 +1,6 @@
 // app.js use map and restaurant apis from mapbox (open street map, leaflet), and zomato.
 
 var markers = [];
-var alreadyShowedRestaurentIds = [];
-var offset = 0;
-var resultSize = 4;
 $(document).ready(function () {
     
     let map = L.map('map').setView([37.773972, -122.431297], 12);
@@ -50,8 +47,8 @@ $(document).ready(function () {
                             lng: position.coords.longitude
                         };
                         initMarker(parseFloat(pos.lat), parseFloat(pos.lng), map);
-                        // var my_url = `https://developers.zomato.com/api/v2.1/search?lat=${pos.lat}&lon=${pos.lng}&cuisines=${cuisines}&sort=real_distance`
-                        var my_url = `https://developers.zomato.com/api/v2.1/search?start=${offset}&count=${resultSize}&lat=${pos.lat}&lon=${pos.lng}&cuisines=132%2C159&sort=real_distance`
+                        var my_url = `https://developers.zomato.com/api/v2.1/search?lat=${pos.lat}&lon=${pos.lng}&cuisines=${cuisines}&sort=real_distance`
+                        // var my_url = `https://developers.zomato.com/api/v2.1/search?start=${offset}&count=${resultSize}&lat=${pos.lat}&lon=${pos.lng}&cuisines=${cuisines}&sort=real_distance`
                         console.log(my_url)
                         $.ajax({
                             url: my_url,
@@ -65,28 +62,41 @@ $(document).ready(function () {
                                 console.log(data.restaurants)
                                 var totalresults = data.restaurants;
                                 if (totalresults.length > 0) {
-                                    // var newArr = nRandEleArr(totalresults, 4);
-                                    // if (alreadyShowedRestaurentIds.length % 20 == 0){
-                                    //     offset += 20;
-                                    // }
-                                    // console.log(offset);
-                                    // console.log(alreadyShowedRestaurentIds);
-                                    // console.log(newArr);
-                                    // newArr.forEach(ele => {
-                                    totalresults.forEach(ele => {
+                                    var newArr = nRandEleArr(totalresults, 4);
+                                    console.log(newArr);
+                                    newArr.forEach(ele => {
                                         track_array.push(ele);
+                                        if(!ele.restaurant.featured_image){
+                                            var image = "static/images/broken_img_link.jpeg";
+                                        }
+                                        else{
+                                            var image = ele.restaurant.featured_image;
+                                        }
                                         $('#restList').append(`
                                         <div>
-                                        <p>Name: ${ele.restaurant.name}</p>
-                                        <img src="${ele.restaurant.featured_image}" width="200em">
-                                        <p>Cuisines: ${ele.restaurant.cuisines}</p>
-                                        <p>Address: ${ele.restaurant.location.address}</p>
-                                        <input type="submit" value="Save restaurant">
+                                            <p>Name: ${ele.restaurant.name}</p>
+                                            <img src="${image}" width="200em">
+                                            <p>Cuisines: ${ele.restaurant.cuisines}</p>
+                                            <p>Address: ${ele.restaurant.location.address}</p>
+                                            <input type="submit" value="Save restaurant">
+                                            <button type="button" data-toggle="modal" data-target="#myModal">Read more</button>
                                         </div>
                                         `);
+                                        $('#readmore').append(`
+                                        <div class="modal fade bd-example-modal-sm" tabindex="-1" id="myModal" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog modal-sm">
+                                            <div class="modal-content" id="resModal">
+                                                <p>${ele.restaurant.name}</p>
+                                                <img src="${image}" width="200em">
+                                                <p>Cuisines: ${ele.restaurant.cuisines}</p>
+                                                <p>Address: ${ele.restaurant.location.address}</p>
+                                                <p>Menu: <a href="${ele.restaurant.menu_url}">${ele.restaurant.name} Menu </a></p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        `)
                                         addMarker(parseFloat(ele.restaurant.location.latitude), parseFloat(ele.restaurant.location.longitude), ele.restaurant.name, map);
                                     });
-                                    offset += 4;
                                 }else{
                                     $('#restList').append(`
                                         <div>
@@ -126,42 +136,18 @@ $(document).ready(function () {
                     console.log(error)
                 }
             })
-        })
+        }) 
     });
 });
 
-// function nRandEleArr(arr, size) {
-//     var tempArr = [];
-//     if (arr.length <= size){
-//         console.log('arr: ',arr);
-//         return arr;
-//     }else{
-//         while (tempArr.length < size) {
-//             console.log('tempArr.length',tempArr.length);
-//             console.log("Hi1", alreadyShowedRestaurentIds.length)
-//             var ele = arr[Math.floor(Math.random() * arr.length)];
-//             console.log("Hi2")
-//             if (!alreadyShowedRestaurentIds.includes(ele.restaurant.id)) {
-//                 tempArr.push(ele);
-//                 console.log("Hi3")
-//                 alreadyShowedRestaurentIds.push(ele.restaurant.id);
-//                 console.log("Hi4")
-//             }
-//         }
-//         console.log("Hi5")
-//         console.log('tempArr',tempArr);
-//         return tempArr;
-//     }
-// }
-
-// function nRandEleArr(arr, size) {
-//     var mySet = new Set();
-//     while (mySet.size < size) {
-//         var ele = arr[Math.floor(Math.random() * arr.length)];
-//         mySet.add(ele);
-//     }
-//     return [...mySet];
-// }
+function nRandEleArr(arr, size) {
+    var mySet = new Set();
+    while (mySet.size < size) {
+        var ele = arr[Math.floor(Math.random() * arr.length)];
+        mySet.add(ele);
+    }
+    return [...mySet];
+}
 
 function addMarker(lat, lng, name, map) {
     var tempM = L.marker([lat, lng]).addTo(map).bindPopup(`<b>${name}</b>`);

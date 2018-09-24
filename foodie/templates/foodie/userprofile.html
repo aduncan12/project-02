@@ -10,44 +10,41 @@
   {% else %}
   <img id="profileImg"  src="{% static 'images/img_profile.png'%}">
   {%endif%}
-  <p id="profileDesc">Description: {{ userprofile.description }}</p>
-</div>
+  <h4 id="profileDesc">Description: {{ userprofile.description }}</h4>
 
-<div id="profile2">
   <!-- <p>Total preferences: {{ userprofile.preferences.all.length }}</p> -->
+  <h3 id="pref">Preferences:</h3>
   <div id="profilePref">
-    <h3>Preferences:</h3>
       {% for preference in userprofile.preferences.all %}
-      <p id="preferences">{{preference.cuisine}}</p>
+      <h5 id="preferences">{{preference.cuisine}}</h5>
       {% endfor %}
   </div>    
   <!-- check if user's profile's profile picture exist, 
     parse the user picture path for img,
     else use the default picture from static path -->
+  <h3 id="rest"> {{ user }}'s Favorite Places:</h3>
   <div id="profileRest">
-    <h3> {{ user }}'s favorite places</h3>
       <div id="user_saved">
         {% for rest in user_saved_rest %}
           <h4>{{rest.name}}</h4>
-          <p>{{rest.description}}</p>
-          <p>{{rest.cuisine}}</p>
-          <form action="review">
-              <input type="submit" value="Review {{rest.name}}" />
-            </form>
+          <h5>{{rest.description}}</h5>
+          <h5>{{rest.cuisine}}</h5>
+          <a href="{% url 'restaurant_delete' id=rest.id %}">Remove</a>
+          <a href="{% url 'create_review' pk=rest.id %}">Review {{rest.name}}</a>
         {% endfor %}
       </div>
   </div>
+
+  <h3 id="profileReview"> {{ user }}'s Reviews</h3>
+  <div id="user_reviews">
+    {% for review in user_reviews %}
+      <h4>{{review.restaurant}} {{review.rating}}</h4>
+      <h5>{{review.content}}</h5>
+      <h5>{{review.user}}</h5>
+      <a href="{% url 'review_delete' id=review.id %}">Delete</a>
+      <a href="{% url 'review_edit' id=review.id %}">Edit review</a>
+    {% endfor %}
+  </div>
 </div>
 
-<div id="profile3">
-  <h2 id="profileReview"> {{ user }}'s Reviews</h2>
-    <div id="user_reviews">
-        {% for review in user_reviews %}
-          <h4>{{review.restaurant}} {{review.rating}}</h4>
-          <p>{{review.content}}</p>
-          <p>{{review.user}}</p>
-          {% endfor %}
-        
-    </div>
-</div>
 {% endblock %}
