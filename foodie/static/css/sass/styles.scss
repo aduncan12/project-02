@@ -266,6 +266,8 @@ overflow-y: auto;
         grid-area: 2 / 1;
         border: 1px solid;
         margin: auto;
+        max-height: 350px;
+        max-width: 350px;
     }
     #profileDesc {
         grid-area: 2 / 2;

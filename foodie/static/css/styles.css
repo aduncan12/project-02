@@ -250,6 +250,8 @@ hr {
   grid-area: 2/1;
   border: 1px solid;
   margin: auto;
+  max-height: 350px;
+  max-width: 350px;
 }
 #profile #profileDesc {
   grid-area: 2/2;
