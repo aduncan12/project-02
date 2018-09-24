@@ -66,10 +66,16 @@ $(document).ready(function () {
                                     console.log(newArr);
                                     newArr.forEach(ele => {
                                         track_array.push(ele);
+                                        if(!ele.restaurant.featured_image){
+                                            var image = ".././images/broken_img_link.jpeg";
+                                        }
+                                        else{
+                                            var image = ele.restaurant.featured_image;
+                                        }
                                         $('#restList').append(`
                                         <div>
                                         <p>Name: ${ele.restaurant.name}</p>
-                                        <img src="${ele.restaurant.featured_image}" width="200em">
+                                        <img src="${image}" width="200em">
                                         <p>Cuisines: ${ele.restaurant.cuisines}</p>
                                         <p>Address: ${ele.restaurant.location.address}</p>
                                         <input type="submit" value="Save restaurant">
