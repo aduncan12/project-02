@@ -24,9 +24,10 @@ $(document).ready(function () {
     map.on('click', onMapClick);
 
     $('#getRestList').on('click', function () {
-        $('#restList').css('background', 'rgba(250, 250, 250, .75)');
+
+        $('#restList').fadeIn("slow");
+
         markers.forEach(function (ele) {
-            console.log(ele);
             map.removeLayer(ele);
         });
         $('#restList').empty();
@@ -51,7 +52,6 @@ $(document).ready(function () {
                         initMarker(parseFloat(pos.lat), parseFloat(pos.lng), map);
                         var my_url = `https://developers.zomato.com/api/v2.1/search?lat=${pos.lat}&lon=${pos.lng}&cuisines=${cuisines}&sort=real_distance`
                         // var my_url = `https://developers.zomato.com/api/v2.1/search?start=${offset}&count=${resultSize}&lat=${pos.lat}&lon=${pos.lng}&cuisines=${cuisines}&sort=real_distance`
-                        console.log(my_url)
                         $.ajax({
                             url: my_url,
                             headers: {
@@ -60,12 +60,9 @@ $(document).ready(function () {
                             method: 'GET',
                             dataType: 'json',
                             success: function (data) {
-                                console.log(data)
-                                console.log(data.restaurants)
                                 var totalresults = data.restaurants;
                                 if (totalresults.length > 0) {
                                     var newArr = nRandEleArr(totalresults, 4);
-                                    console.log(newArr);
                                     newArr.forEach(ele => {
                                         track_array.push(ele);
                                         if(!ele.restaurant.featured_image){
@@ -81,23 +78,9 @@ $(document).ready(function () {
                                             <p>Cuisines: ${ele.restaurant.cuisines}</p>
                                             <p>Address: ${ele.restaurant.location.address}</p>
                                             <input type="submit" value="Save restaurant">
-                                            <button type="button" data-toggle="modal" data-target="#myModal">Read more</button>
+                                            <button class="rest-model" data-toggle="modal" data-target="#myModal">Read more</button>
                                         </div>
                                         `);
-                                        $('#readmore').append(`
-                                        <div class="modal fade bd-example-modal-sm" tabindex="-1" id="myModal" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                                          <div class="modal-dialog modal-sm">
-                                            <div class="modal-content" id="resModal">
-                                                <p>${ele.restaurant.name}</p>
-                                                <img src="${image}" width="200em">
-                                                <p>Cuisines: ${ele.restaurant.cuisines}</p>
-                                                <p>Address: ${ele.restaurant.location.address}</p>
-                                                <p>Menu: <a href="${ele.restaurant.menu_url}">${ele.restaurant.name} Menu </a></p>
-                                                <p>Average cost for two: $${ele.restaurant.average_cost_for_two}</p>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        `)
                                         addMarker(parseFloat(ele.restaurant.location.latitude), parseFloat(ele.restaurant.location.longitude), ele.restaurant.name, map);
                                     });
                                 }else{
@@ -120,6 +103,7 @@ $(document).ready(function () {
                 console.log(error);
             }
         });
+        console.log(track_array);
         $('#restList').on('click','input',function(e){
             e.preventDefault();
             var idxClicked = $(this).index('input');
@@ -139,7 +123,26 @@ $(document).ready(function () {
                     console.log(error)
                 }
             })
-        }) 
+        })
+        // <img src="${image}" width="200em"></img>
+        $('#restList').on('click',".rest-model",function(e){
+            e.preventDefault();
+            var idx = $(this).index('.rest-model');
+            $('#readmore').html(`
+                <div class="modal fade bd-example-modal-sm" tabindex="-1" id="myModal" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                    <div class="modal-content" id="resModal">
+                        <p>${track_array[idx].restaurant.name}</p>
+                        <img src="${track_array[idx].restaurant.featured_image}" width="200em">
+                        <p>Cuisines: ${track_array[idx].restaurant.cuisines}</p>
+                        <p>Address: ${track_array[idx].restaurant.location.address}</p>
+                        <p>Menu: <a href="${track_array[idx].restaurant.menu_url}">${track_array[idx].restaurant.name} Menu </a></p>
+                        <p>Average cost for two: $${track_array[idx].restaurant.average_cost_for_two}</p>
+                    </div>
+                    </div>
+                </div>
+            `)
+        });
     });
 });
 
