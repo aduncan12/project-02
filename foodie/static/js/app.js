@@ -1,5 +1,6 @@
 // app.js use map and restaurant apis from mapbox (open street map, leaflet), and zomato.
-
+// initialize the map object, set the center of the map and zoom level,
+// ... still writing here ...
 var markers = [];
 $(document).ready(function () {
     
