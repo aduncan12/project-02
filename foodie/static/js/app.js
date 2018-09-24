@@ -92,6 +92,7 @@ $(document).ready(function () {
                                                 <p>Cuisines: ${ele.restaurant.cuisines}</p>
                                                 <p>Address: ${ele.restaurant.location.address}</p>
                                                 <p>Menu: <a href="${ele.restaurant.menu_url}">${ele.restaurant.name} Menu </a></p>
+                                                <p>Average cost for two: ${ele.restaurant.average_cost_for_two}</p>
                                             </div>
                                           </div>
                                         </div>
