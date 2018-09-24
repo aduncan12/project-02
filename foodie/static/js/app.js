@@ -24,6 +24,7 @@ $(document).ready(function () {
     map.on('click', onMapClick);
 
     $('#getRestList').on('click', function () {
+        $('#restList').css('background', 'rgba(250, 250, 250, .75)');
         markers.forEach(function (ele) {
             console.log(ele);
             map.removeLayer(ele);
