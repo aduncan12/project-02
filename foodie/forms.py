@@ -19,7 +19,7 @@ class UserProfileForm(forms.ModelForm):
     preferences = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,queryset=Preference.objects.all())
     class Meta():
         model = UserProfile
-        fields = ('description','preferences','profile_pic')
+        fields = ('profile_pic', 'description','preferences')
 
 class ReviewForm(forms.ModelForm):
     class Meta():
