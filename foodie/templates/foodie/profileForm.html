@@ -3,17 +3,15 @@
 
 {% block content %}
 <div>
-
-
-        <form class="profile" enctype="multipart/form-data" method="POST">
-            {% if registered %}
-            <h2 class="profileHeader">Edit successfully!</h2> 
-            {% else %}        
-            <h2 class="profileHeader">Edit {{ user }}'s profile</h2>
-            {% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" name="" value="Update">
-        </form>
+    <form id="edit_profile" enctype="multipart/form-data" method="POST">
+        {% if registered %}
+        <h2 class="profileHeader">Edit Successful!</h2> 
+        {% else %}        
+        <h2 class="profileHeader">Edit {{ user }}'s Profile</h2>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input id="submit_edit" type="submit" name="" value="Update">
+    </form>
     {% endif %}
 </div>
 {% endblock %}

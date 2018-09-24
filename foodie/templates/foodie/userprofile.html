@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block content %}
-<div class="profile">
+<div id="profile">
   <h2 class="profileHeader">{{ user }}'s Profile</h2>
   {% if  user.userprofile.profile_pic %}
   <!-- image src only need this project path, os.path is done in settings.py and urls.py -->
