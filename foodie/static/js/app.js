@@ -67,7 +67,7 @@ $(document).ready(function () {
                                     newArr.forEach(ele => {
                                         track_array.push(ele);
                                         if(!ele.restaurant.featured_image){
-                                            var image = ".././images/broken_img_link.jpeg";
+                                            var image = "static/images/broken_img_link.jpeg";
                                         }
                                         else{
                                             var image = ele.restaurant.featured_image;
