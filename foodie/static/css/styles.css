@@ -1,5 +1,6 @@
 body {
   background-color: rgba(204, 204, 204, 0.495);
+  font-family: "EB Garamond", serif;
 }
 
 #teamfoodie {
@@ -422,6 +423,29 @@ hr {
   padding: 10px;
 }
 
+@media screen and (max-width: 950px) {
+  #profileImg {
+    width: 300px;
+    height: 300px;
+  }
+}
+@media screen and (max-width: 715px) {
+  #profileImg {
+    width: 200px;
+    height: 200px;
+  }
+}
+@media screen and (max-width: 490px) {
+  #profileImg {
+    width: 150px;
+    height: 150px;
+  }
+}
+@media screen and (max-width: 360px) {
+  #profileImg {
+    display: none;
+  }
+}
 @media screen and (max-width: 450px) {
   #map_restList {
     height: 90vh;
