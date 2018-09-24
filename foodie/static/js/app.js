@@ -68,6 +68,7 @@ $(document).ready(function () {
                                             <p>Address: ${ele.restaurant.location.address}</p>
                                             <input type="submit" value="Save restaurant">
                                             <button class="rest-model" data-toggle="modal" data-target="#myModal">Read more</button>
+                                            <hr>
                                         </div>
                                         `);
                                         addMarker(parseFloat(ele.restaurant.location.latitude), parseFloat(ele.restaurant.location.longitude), ele.restaurant.name, map);
