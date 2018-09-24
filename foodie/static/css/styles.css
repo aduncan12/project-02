@@ -230,7 +230,7 @@ hr {
   margin-bottom: 5%;
 }
 
-#profile {
+.profile {
   margin-top: 70px;
   margin-right: 1%;
   margin-left: 1%;
@@ -245,16 +245,16 @@ hr {
   -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
-  background-image: url("../images/pancakes.jpeg");
+  background-image: url("../images/veggies.jpg");
   background-size: cover;
   color: #FFFFFF;
   text-shadow: 2px 2px 4px #000000;
 }
-#profile #profileHeader {
+.profile .profileHeader {
   grid-area: 1/span 2;
   margin: auto;
 }
-#profile #profileImg {
+.profile #profileImg {
   grid-area: 2/1;
   border: 1px solid #333333;
   margin: auto;
@@ -264,7 +264,7 @@ hr {
   -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
 }
-#profile #description {
+.profile #description {
   grid-area: 2/2;
   margin: 5%;
   border: 2px solid #333333;
@@ -274,18 +274,18 @@ hr {
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
   overflow-y: auto;
 }
-#profile #profileDesc {
+.profile #profileDesc {
   margin: 2%;
 }
-#profile #pref {
+.profile #pref {
   grid-area: 3/1;
   margin: auto;
 }
-#profile #rest {
+.profile #rest {
   grid-area: 3/2;
   margin: auto;
 }
-#profile #profilePref {
+.profile #profilePref {
   grid-area: 4/1;
   overflow-y: auto;
   margin: 2% 5%;
@@ -295,7 +295,7 @@ hr {
   -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
 }
-#profile #profileRest {
+.profile #profileRest {
   grid-area: 4/2;
   overflow-y: auto;
   margin: 2% 5%;
@@ -305,11 +305,11 @@ hr {
   -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
 }
-#profile #profileReview {
+.profile #profileReview {
   grid-area: 5/span 2;
   margin: auto;
 }
-#profile #user_reviews {
+.profile #user_reviews {
   grid-area: 6/span 2;
   overflow-y: auto;
   margin: 2% 15%;
@@ -318,6 +318,10 @@ hr {
   -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#id_preferences {
+  list-style-type: none;
 }
 
 #user_saved, #preferences, #user_reviews2 {

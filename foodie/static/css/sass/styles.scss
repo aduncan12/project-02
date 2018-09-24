@@ -247,7 +247,7 @@ overflow-y: auto;
 // flex-direction: column;
 // }}
 
-#profile {
+.profile {
     margin-top: 70px;
     margin-right: 1%;
     margin-left: 1%;
@@ -262,12 +262,12 @@ overflow-y: auto;
     -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
     -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
     box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
-    background-image: url("../images/pancakes.jpeg");
+    background-image: url("../images/veggies.jpg");
     background-size: cover;
     color: #FFFFFF;
     text-shadow: 2px 2px 4px #000000;
 
-    #profileHeader{
+    .profileHeader{
         grid-area: 1 / span 2;
         margin: auto;
     }
@@ -336,6 +336,9 @@ overflow-y: auto;
         -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
         box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
     }
+}
+#id_preferences {
+    list-style-type: none;
 }
 
 #user_saved, #preferences, #user_reviews2 {
