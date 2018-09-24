@@ -111,6 +111,7 @@
 - Sending Json from back end to front end
 - User reviews to show up on userprofile
 - Trouble shooting and debugging
+- Pushing to heroku
 
 ### Successes
 - Getting database set up quickly
