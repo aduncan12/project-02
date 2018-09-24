@@ -3,8 +3,7 @@
 {% block content %}
 <div class="container picture4">
     <div class="jumbotron review">
-    
-        <h1>Review for {{ review.restaurant }}</h1>
+        <h1>Review for {{ review.restaurant }} {{ restaurant.name }}</h1>
         <form class='reviewform' enctype="multipart/form-data" method="POST">
             {% csrf_token %}
             {{ form.as_p }}

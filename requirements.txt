@@ -4,8 +4,11 @@ backcall==0.1.0
 decorator==4.3.0
 dj-database-url==0.5.0
 Django==2.0.5
+django-braces==1.13.0
 django-extensions==2.1.2
 django-heroku==0.3.1
+django-model-utils==3.1.2
+django-star-ratings==0.7.0
 ipython==6.5.0
 ipython-genutils==0.2.0
 isort==4.3.4
@@ -25,6 +28,7 @@ pylint==2.1.1
 pytz==2018.5
 simplegeneric==0.8.1
 six==1.11.0
+swapper==1.1.0
 traitlets==4.3.2
 virtualenv==16.0.0
 wcwidth==0.1.7
