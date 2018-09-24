@@ -171,7 +171,14 @@ def user_preferences(request):
             pref_array.append(int(pref.api_id))
         return JsonResponse({"preferences": pref_array})
 
-# 
+# after user saved a restaurant, in userprofile, user can create review of a restaurant,
+# (user variable means userprofile),
+# pk is the database pk of saved restaurant that currently selected,
+# if form valid, add in form data (only content for now, will work on rating later),
+# save(commit=False) mean only add data but not yet save to database,
+# add userprofile and restaurant, then save to database,
+# if success redirect userprofile page,
+# if faild, render the review form again.
 @login_required
 def create_review(request,pk):
     user = UserProfile.objects.get(id=request.user.id)
@@ -190,11 +197,19 @@ def create_review(request,pk):
         form = ReviewForm()
     return render(request, 'foodie/review_form.html', {'form': form , 'restaurant':restaurant})
 
+# not in use.
+# use only during development to see each reviews.
 @login_required
 def review_view(request, pk):
     review = Review.objects.get(id=pk)
     return render(request, 'foodie/review_view.html', {'review': review})
 
+# edit review on userprofile page.
+# get review by selected review id,
+# populate the form with original review data,
+# after update, save to database,
+# if success redirect userprofile page,
+# if faild, render the review form again.
 @login_required
 def review_edit(request,id):
     review = Review.objects.get(id=id)

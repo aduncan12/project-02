@@ -1,5 +1,6 @@
 // app.js use map and restaurant apis from mapbox (open street map, leaflet), and zomato.
-
+// initialize the map object, set the center of the map and zoom level,
+// ... still writing here ...
 var markers = [];
 $(document).ready(function () {
     
@@ -66,10 +67,16 @@ $(document).ready(function () {
                                     console.log(newArr);
                                     newArr.forEach(ele => {
                                         track_array.push(ele);
+                                        if(!ele.restaurant.featured_image){
+                                            var image = "static/images/broken_img_link.jpeg";
+                                        }
+                                        else{
+                                            var image = ele.restaurant.featured_image;
+                                        }
                                         $('#restList').append(`
                                         <div>
                                         <p>Name: ${ele.restaurant.name}</p>
-                                        <img src="${ele.restaurant.featured_image}" width="200em">
+                                        <img src="${image}" width="200em">
                                         <p>Cuisines: ${ele.restaurant.cuisines}</p>
                                         <p>Address: ${ele.restaurant.location.address}</p>
                                         <input type="submit" value="Save restaurant">
