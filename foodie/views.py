@@ -162,18 +162,6 @@ def user_preferences(request):
         return JsonResponse({"preferences": pref_array})
 
 @login_required
-def review_edit(request, pk):
-    review = Review.objects.get(id=pk)
-    if request.method == 'POST':
-        form = ReviewForm(request.POST, instance=review)
-        if form.is_valid():
-            review = form.save()
-            return redirect('userprofile', pk=review.id)
-    else:
-        form = ReviewForm(instance=review)
-    return render(request, 'foodie/review_form.html', {'form': form})
-
-@login_required
 def create_review(request,pk):
     user = UserProfile.objects.get(id=request.user.id)
     restaurant = Restaurant.objects.get(id=pk)
