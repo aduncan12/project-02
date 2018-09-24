@@ -123,7 +123,11 @@ def userprofile(request):
     user_saved_rest = Restaurant.objects.filter(user_id = user_id)
     return render(request, 'foodie/userprofile.html', {'userprofile': userprofile, 'user_reviews': user_reviews,'user_saved_rest':user_saved_rest})
 
-# authenticate login user from login.html
+# authenticate login user from login.html,
+# if successful login and active redirect to home page,
+# if logged in but inactive (blacklisted), display message,
+# if cannot login, display message,
+# if not POST request, back to login.html
 def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -142,15 +146,21 @@ def user_login(request):
     else:
         return render(request, 'foodie/login.html', {})
 
+# render login.html,
+# restaurant has a foreign key of userprofile, 
+# inorder to create restaurant, we need to create userprofile first,
+# so we make sure userprofile was created, or create one now.
 @login_required
 def restaurants(request):
     user = User.objects.get(id=request.user.id)
     userprofile , created = UserProfile.objects.get_or_create(user=user)
     return render(request, 'foodie/restaurants.html')
 
-# get Current logged in user by id: User.objects.get(id=request.user.id)
-# get all preferences of the use: user.userprofile.preferences.all()
-# sent response back serialize given dictionary to json object
+# pass data from backend database to frontend ajax GET.
+# get Current logged in user by id: User.objects.get(id=request.user.id),
+# get all preferences of the use: user.userprofile.preferences.all(),
+# store only each preference's api_id which means cuisine to another array,
+# sent response back, JsonResponse will auto serialize given dictionary to json object.
 @login_required
 def user_preferences(request):
     if request.method == 'GET':
@@ -161,6 +171,14 @@ def user_preferences(request):
             pref_array.append(int(pref.api_id))
         return JsonResponse({"preferences": pref_array})
 
+# after user saved a restaurant, in userprofile, user can create review of a restaurant,
+# (user variable means userprofile),
+# pk is the database pk of saved restaurant that currently selected,
+# if form valid, add in form data (only content for now, will work on rating later),
+# save(commit=False) mean only add data but not yet save to database,
+# add userprofile and restaurant, then save to database,
+# if success redirect userprofile page,
+# if faild, render the review form again.
 @login_required
 def create_review(request,pk):
     user = UserProfile.objects.get(id=request.user.id)
@@ -179,11 +197,19 @@ def create_review(request,pk):
         form = ReviewForm()
     return render(request, 'foodie/review_form.html', {'form': form , 'restaurant':restaurant})
 
+# not in use.
+# use only during development to see each reviews.
 @login_required
 def review_view(request, pk):
     review = Review.objects.get(id=pk)
     return render(request, 'foodie/review_view.html', {'review': review})
 
+# edit review on userprofile page.
+# get review by selected review id,
+# populate the form with original review data,
+# after update, save to database,
+# if success redirect userprofile page,
+# if faild, render the review form again.
 @login_required
 def review_edit(request,id):
     review = Review.objects.get(id=id)
@@ -197,6 +223,16 @@ def review_edit(request,id):
         form = ReviewForm(instance=review)
     return render(request, 'foodie/review_form.html', {'form': form, 'review': review})
 
+# receive data sent from frontend ajax to this backend and save to database.
+# (in this user variable means userprofile),
+# objects.create() will create restaurant enter the user field (because userprofile foreignkey),
+# in app.js ajax passed in json object {'array':track_array[idxClicked],} looks like python dictionary,
+# idxClicked means which index of the sibling item, since we got 4 restaurants, so will be either 0 - 3,
+# track_array[] store each of those 4 restaurants json object,
+# 'array' just a object key,
+# 'array[restaurant][name]' is the dictionary, kinf like array.restaurant.name,
+# save to database,
+# then just return whatever (ajax wont receive the send back)
 @csrf_exempt
 @login_required
 def save_restaurant(request):
@@ -210,11 +246,15 @@ def save_restaurant(request):
         restaurant.save()
         return HttpResponse(QueryDict(request.body))
 
+# find and delete review,
+# userprofile already loop through review.id.
 @login_required
 def review_delete(request, id):
     Review.objects.get(id=id).delete()
     return redirect('userprofile')
 
+# find and delete restaurant,
+# userprofile already loop through rest.id.
 @login_required
 def restaurant_delete(request, id):
     Restaurant.objects.get(id=id).delete()
