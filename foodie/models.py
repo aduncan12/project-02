@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 
 class Preference(models.Model):
@@ -33,7 +34,8 @@ class Review(models.Model):
     user = models.ForeignKey(UserProfile,on_delete=models.CASCADE, related_name='review')
     restaurant = models.ForeignKey(Restaurant,on_delete=models.CASCADE, related_name='review')
     content = models.TextField(blank=True)
-    rating = models.PositiveSmallIntegerField()
+    rating = models.PositiveSmallIntegerField(default=1,
+        validators=[MaxValueValidator(5), MinValueValidator(1)])
 
     def __str__(self):
         return f'{self.restaurant} {self.rating} {self.content} {self.user}'
