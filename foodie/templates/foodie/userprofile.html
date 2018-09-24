@@ -44,6 +44,11 @@
       <h4>{{review.restaurant}} {{review.rating}}</h4>
       <h5>{{review.content}}</h5>
       <h5>{{review.user}}</h5>
+      <h5>
+        {% for i in "x"|ljust:review.rating %}
+          <i class="fa fa-star" aria-hidden="true"></i>
+        {% endfor %}
+      </h5>
       <a href="{% url 'review_edit' id=review.id %}">Edit review</a>
       <a href="{% url 'review_delete' id=review.id %}">Delete</a>
       <hr>

@@ -121,6 +121,14 @@ def userprofile(request):
     userprofile , created = UserProfile.objects.get_or_create(user=user)
     user_reviews = Review.objects.filter(user_id = user_id)
     user_saved_rest = Restaurant.objects.filter(user_id = user_id)
+    total = 0
+    # # try to do average rating, but each time user left rating also add duplicate restaurants
+    # curRestaurant = Restaurant.objects.get(name='Bistro Burger')
+    # reviews = Review.objects.get(restaurant=curRestaurant) 
+    # for r in reviews:
+    #     total+= r.rating
+    # total = total/len(reviews)
+    # return render(request, 'foodie/userprofile.html', {'userprofile': userprofile, 'user_reviews': user_reviews,'user_saved_rest':user_saved_rest, 'total': total})
     return render(request, 'foodie/userprofile.html', {'userprofile': userprofile, 'user_reviews': user_reviews,'user_saved_rest':user_saved_rest})
 
 # authenticate login user from login.html,
@@ -200,7 +208,7 @@ def create_review(request,pk):
 # not in use.
 # use only during development to see each reviews.
 @login_required
-def review_view(request, pk):
+def review_view(request):
     review = Review.objects.get(id=pk)
     return render(request, 'foodie/review_view.html', {'review': review})
 
