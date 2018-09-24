@@ -9,8 +9,8 @@ verify_ssl = true
 django = "*"
 gunicorn = "*"
 django-heroku = "*"
-
+pillow = "*"
 
 [requires]
 
-python_version = "3.7.0"
+python_version = "3.6"
