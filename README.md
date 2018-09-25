@@ -21,6 +21,8 @@
 - __JavaScript & jQuery__: Add dynamic client-side behavior with event-driven functionality.
 - __User-Friendly URLs__:.
 
+## project with documentations is in release branch.
+
 ## code snippet
 - Inorder to create a review.
 - First create django roiute, (Review, Restaurant) models in database, ReviewForm django form, user, and save a restaurant to userprofile,
