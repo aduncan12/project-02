@@ -6,10 +6,12 @@
   <h2 class="profileHeader">{{ user }}'s Profile</h2>
   {% if  user.userprofile.profile_pic %}
   <!-- image src only need this project path, os.path is done in settings.py and urls.py -->
-  <img id="profileImg" src="{{ user.userprofile.profile_pic.url }}">
+  <div id="profileImgContainer">
+    <img id="profileImg" src="{{ user.userprofile.profile_pic.url }}">
   {% else %}
-  <img id="profileImg" src="{% static 'images/img_profile.png'%}">
+    <img id="profileImg" src="{% static 'images/img_profile.png'%}">
   {%endif%}
+  </div>
   <div id="description">
     <h4 id="profileDesc">{{ userprofile.description }}</h4>
   </div>
