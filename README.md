@@ -104,6 +104,25 @@
 - Html Scroll bar for displayed restaurants on generator page
 - User does not need to update profile at all in order to find and save restaurant
 
+### 9-23-2018
+- Fixed image on user profiles
+- Edit profiles
+- Create, edit, and delete review link for restaurants
+- Code cleaning
+- Try to upgrade random generated restaurants.
+- Adding documentation (only in release branch)
+- Added modal
+- Fixed update image
+
+### 9-24-2018
+- added zoom to map
+- change map to takeup whole page, overlay restaurants list on top
+- added fade in restaurants list
+- deploy to Heroku
+- title icon
+- fixed model
+- added rating
+
 ## Challenges/Successes
 
 ### Challenges
