@@ -425,6 +425,29 @@ hr {
   padding: 10px;
 }
 
+@media screen and (max-width: 950px) {
+  #profileImg {
+    width: 300px;
+    height: 300px;
+  }
+}
+@media screen and (max-width: 715px) {
+  #profileImg {
+    width: 200px;
+    height: 200px;
+  }
+}
+@media screen and (max-width: 490px) {
+  #profileImg {
+    width: 150px;
+    height: 150px;
+  }
+}
+@media screen and (max-width: 360px) {
+  #profileImg {
+    display: none;
+  }
+}
 @media screen and (max-width: 650px) {
   #map_restList {
     display: flex;
