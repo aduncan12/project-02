@@ -46,10 +46,11 @@ path('restaurant/<int:pk>/review/new', views.create_review, name='create_review'
 </div>
 ```
 
-- In views.py, get userprofile by logged in user id,
+- In views.py, make sure use had logged in,
+- get userprofile by logged in user id,
 - get restaurant by the pass in rest.id,
 - launch the ReviewForm() which will generate the form in review_form.html, connect the form data to Review model in database, assign to form variable,
-- check the form data, add form data to Review model, save to database,
+- check the form data, add form data (save(commit=False) only add but not save) to Review model, save to database,
 - error check, else let user do review form again.
 ```
 from django.shortcuts import render, redirect
@@ -85,7 +86,9 @@ class ReviewForm(forms.ModelForm):
         fields = ('content', 'rating')
 ```
 
-- In review_form.html, html file with django code
+- In review_form.html, html file with django code, 
+- if the edit review is rendered, it will use the review.restaurant, and restaurnat.name will be null,
+- {{ form.as_p }} auto generate the form fields,
 ```
 {% extends "foodie/base.html" %}
 {% load staticfiles %}
