@@ -188,7 +188,6 @@ h4, h5 {
 }
 
 hr {
-  margin-top: 5.5%;
   border-color: #333333;
 }
 
@@ -198,7 +197,7 @@ hr {
   flex-direction: row;
   align-content: space-between;
   justify-content: space-between;
-  margin-top: 50px;
+  margin-top: 55px;
 }
 
 #getRestList {
@@ -211,7 +210,7 @@ hr {
 
 #map {
   width: 100vw;
-  height: 90vh;
+  height: 93vh;
   z-index: 1;
   background-size: cover;
 }
@@ -256,12 +255,10 @@ hr {
   grid-area: 1/span 2;
   margin: auto;
 }
-#profile #profileImg, #edit_profile #profileImg {
+#profile #profileImgContainer, #edit_profile #profileImgContainer {
   grid-area: 2/1;
   border: 1px solid #333333;
-  margin: auto 12%;
-  max-height: 400px;
-  max-width: 400px;
+  margin: 5%;
   -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
@@ -322,6 +319,11 @@ hr {
   -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
   -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#profileImg {
+  height: 100%;
+  width: 100%;
 }
 
 #profile {
@@ -423,31 +425,10 @@ hr {
   padding: 10px;
 }
 
-@media screen and (max-width: 950px) {
-  #profileImg {
-    width: 300px;
-    height: 300px;
-  }
-}
-@media screen and (max-width: 715px) {
-  #profileImg {
-    width: 200px;
-    height: 200px;
-  }
-}
-@media screen and (max-width: 490px) {
-  #profileImg {
-    width: 150px;
-    height: 150px;
-  }
-}
-@media screen and (max-width: 360px) {
-  #profileImg {
-    display: none;
-  }
-}
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 650px) {
   #map_restList {
+    display: flex;
+    flex-direction: row;
     height: 90vh;
     align-content: space-between;
     justify-content: space-between;
@@ -455,28 +436,25 @@ hr {
   }
 
   #map {
-    width: 50vw;
+    width: 100vw;
     height: 90vh;
     z-index: 1;
   }
 
   #restList {
-    margin-left: 0%;
-    margin-top: 5em;
-    display: flex;
-    flex-direction: row;
+    display: none;
+    flex-direction: column;
     justify-content: space-between;
     width: 100vw;
-    height: 88.3vh;
+    height: 41vh;
     z-index: 1;
-    font-size: 1em;
     overflow-x: auto;
+    margin-top: 47vh;
+    margin-left: 0;
   }
   #restList div {
-    margin: 0;
-    width: 40%;
-    height: auto;
-    text-align: center;
+    margin: 2%;
+    font-size: 1.75rem;
   }
 }
 
